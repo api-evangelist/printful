@@ -1,0 +1,77 @@
+aid: printful
+name: Printful
+review:
+  question: Does Printful expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-25'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Printful exposes only request/response
+    REST endpoints under https://api.printful.com (v2 under /v2). Asynchronous
+    delivery is provided via outbound HTTP webhooks (POST to a merchant URL),
+    which are server-to-server callbacks, not a WebSocket or SSE streaming
+    transport, so no AsyncAPI channel was modeled.
+findings:
+  summary: |
+    Printful does not publish a documented public WebSocket API. The Printful
+    platform is REST/HTTPS only, served from https://api.printful.com with v2
+    endpoints under the /v2 prefix and the legacy v1 endpoints alongside.
+    Authentication uses OAuth 2.0 access tokens or private tokens passed as a
+    Bearer token in the Authorization header, with account-level tokens
+    scoping to a store via the X-PF-Store-Id header. Event-driven delivery is
+    handled through outbound HTTP webhooks the merchant configures; there is no
+    documented realtime, bidirectional, or streaming WebSocket (ws:// or wss://)
+    endpoint.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.printful.com
+      documented: true
+    - protocol: Webhooks
+      scheme: https
+      note: Outbound server-to-server HTTP callbacks the merchant configures; not WebSocket and not client-subscribed streaming.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Printful's API reference as of the review date.
+  endpointsConfirmedRest:
+    - GET  https://api.printful.com/v2/catalog-products
+    - GET  https://api.printful.com/v2/catalog-products/{id}
+    - GET  https://api.printful.com/v2/catalog-products/{id}/catalog-variants
+    - GET  https://api.printful.com/v2/catalog-variants/{id}
+    - GET  https://api.printful.com/v2/catalog-categories
+    - GET  https://api.printful.com/store/products
+    - GET  https://api.printful.com/store/products/{id}
+    - GET  https://api.printful.com/v2/orders
+    - POST https://api.printful.com/v2/orders
+    - GET  https://api.printful.com/v2/orders/{id}
+    - POST https://api.printful.com/v2/orders/{id}/confirm
+    - POST https://api.printful.com/v2/order-estimation-tasks
+    - POST https://api.printful.com/v2/files
+    - GET  https://api.printful.com/v2/files/{id}
+    - POST https://api.printful.com/v2/mockup-tasks
+    - GET  https://api.printful.com/v2/mockup-tasks
+    - POST https://api.printful.com/v2/shipping-rates
+    - GET  https://api.printful.com/v2/warehouse-products
+    - GET  https://api.printful.com/v2/webhooks
+    - POST https://api.printful.com/v2/webhooks
+    - GET  https://api.printful.com/v2/webhook-events
+  sources:
+    - url: https://developers.printful.com/docs/v2-beta/
+      type: Documentation
+      note: v2 (Open Beta) reference; all documented endpoints are HTTPS REST under /v2, base URL https://api.printful.com. No WebSocket mentioned.
+    - url: https://developers.printful.com/docs/
+      type: Documentation
+      note: v1 reference; REST endpoints under https://api.printful.com. Event delivery is via outbound HTTP webhooks.
+    - url: https://help.printful.com/hc/en-us/articles/10293184543260-What-should-I-know-about-Printful-s-API-v2
+      type: Documentation
+      note: Describes the v2 API, OAuth 2.0 token auth, and the /v2 prefix.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists, and event delivery is via outbound
+    HTTP webhooks rather than a client-subscribed streaming transport, so no
+    AsyncAPI document was authored. The apis.yml catalogs the REST surface only.

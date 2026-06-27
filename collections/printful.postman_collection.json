@@ -1,0 +1,371 @@
+{
+  "info": {
+    "name": "Printful API",
+    "description": "Printful print-on-demand and order-fulfillment API (v2 and v1). Authenticate with an OAuth 2.0 access token or private token as a Bearer token; account-level tokens scope to a store via the X-PF-Store-Id header. Base URL https://api.printful.com.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.printful.com"
+    },
+    {
+      "key": "storeId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Catalog",
+      "item": [
+        {
+          "name": "List catalog products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2/catalog-products",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "catalog-products"]
+            }
+          }
+        },
+        {
+          "name": "Get catalog product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2/catalog-products/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "catalog-products", ":id"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "List catalog product variants",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2/catalog-products/:id/catalog-variants",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "catalog-products", ":id", "catalog-variants"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Get catalog variant",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2/catalog-variants/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "catalog-variants", ":id"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "List catalog categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v2/catalog-categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "catalog-categories"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Store Products",
+      "item": [
+        {
+          "name": "List store products",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "products"]
+            }
+          }
+        },
+        {
+          "name": "Get store product",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/store/products/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["store", "products", ":id"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "List orders",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/v2/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Create order",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-PF-Store-Id", "value": "{{storeId}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipient\": {\n    \"name\": \"John Smith\",\n    \"address1\": \"19749 Dearborn St\",\n    \"city\": \"Chatsworth\",\n    \"state_code\": \"CA\",\n    \"country_code\": \"US\",\n    \"zip\": \"91311\"\n  },\n  \"order_items\": [\n    {\n      \"catalog_variant_id\": 1,\n      \"quantity\": 1\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v2/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Get order",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/v2/orders/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "orders", ":id"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Confirm order",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/v2/orders/:id/confirm",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "orders", ":id", "confirm"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Create order estimation task",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-PF-Store-Id", "value": "{{storeId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": {
+              "raw": "{{baseUrl}}/v2/order-estimation-tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "order-estimation-tasks"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Files",
+      "item": [
+        {
+          "name": "Add file",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-PF-Store-Id", "value": "{{storeId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"type\": \"default\",\n  \"url\": \"https://example.com/design.png\"\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/v2/files",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "files"]
+            }
+          }
+        },
+        {
+          "name": "Get file",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/v2/files/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "files", ":id"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mockup Generator",
+      "item": [
+        {
+          "name": "Create mockup task",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-PF-Store-Id", "value": "{{storeId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": {
+              "raw": "{{baseUrl}}/v2/mockup-tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "mockup-tasks"]
+            }
+          }
+        },
+        {
+          "name": "Get mockup tasks",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/v2/mockup-tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "mockup-tasks"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shipping Rates",
+      "item": [
+        {
+          "name": "Calculate shipping rates",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-PF-Store-Id", "value": "{{storeId}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipient\": {\n    \"address1\": \"19749 Dearborn St\",\n    \"city\": \"Chatsworth\",\n    \"country_code\": \"US\",\n    \"state_code\": \"CA\",\n    \"zip\": \"91311\"\n  },\n  \"order_items\": [\n    {\n      \"catalog_variant_id\": 1,\n      \"quantity\": 1\n    }\n  ],\n  \"currency\": \"USD\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v2/shipping-rates",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "shipping-rates"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Warehouse",
+      "item": [
+        {
+          "name": "List warehouse products",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/v2/warehouse-products",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "warehouse-products"]
+            }
+          }
+        },
+        {
+          "name": "Get warehouse product",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/v2/warehouse-products/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "warehouse-products", ":id"],
+              "variable": [{ "key": "id", "value": "1" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Get webhooks",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/v2/webhooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "webhooks"]
+            }
+          }
+        },
+        {
+          "name": "Set webhooks",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-PF-Store-Id", "value": "{{storeId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"default_url\": \"https://example.com/webhooks/printful\",\n  \"events\": [\n    { \"type\": \"order_created\" }\n  ]\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/v2/webhooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "webhooks"]
+            }
+          }
+        },
+        {
+          "name": "Get webhook events",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "X-PF-Store-Id", "value": "{{storeId}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/v2/webhook-events",
+              "host": ["{{baseUrl}}"],
+              "path": ["v2", "webhook-events"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

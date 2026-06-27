@@ -1,0 +1,50 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Printful
+providerId: printful
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: true
+tags:
+- Print on Demand
+- Fulfillment
+- Ecommerce
+- Dropshipping
+- Merchandise
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Printful API enforces a default limit of 120 requests per 60 seconds
+  using a leaky-bucket algorithm, applied per access token / store. Some
+  resource-intensive endpoints (for example mockup generation) have stricter
+  per-endpoint limits. Exceeding a limit returns HTTP 429.
+notes: >-
+  Confirm the current default and any per-endpoint limits in the Printful
+  developer documentation during reconciliation; resource-intensive endpoints
+  may apply lower limits than the global default.
+sources:
+- https://developers.printful.com/docs/v2-beta/
+- https://developers.printful.com/docs/
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: token
+  metric: requests
+  limit: 120 per 60 seconds
+  notes: Default leaky-bucket limit applied per access token / store.
+- name: Resource-Intensive Endpoints
+  scope: token
+  metric: requests
+  limit: see provider documentation
+  notes: Endpoints such as the mockup generator may enforce stricter limits than the default.
+policies:
+- name: Leaky Bucket
+  description: Requests are metered with a leaky-bucket algorithm over a 60-second window.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on HTTP 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,190 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Printful API",
+    "version": "2.0",
+    "description": "Printful print-on-demand and order-fulfillment API (v2 and v1). Base URL https://api.printful.com; v2 endpoints use the /v2 prefix. Authenticate with an OAuth 2.0 access token or private token as a Bearer token; account-level tokens scope to a store via the X-PF-Store-Id header."
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Catalog", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List catalog products", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/catalog-products" },
+          "docs": "Retrieve a list of products available in Printful's catalog."
+        },
+        {
+          "info": { "name": "Get catalog product", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/catalog-products/{id}" },
+          "docs": "Retrieve information about a single catalog product."
+        },
+        {
+          "info": { "name": "List catalog product variants", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/catalog-products/{id}/catalog-variants" },
+          "docs": "Retrieve all variants of a catalog product."
+        },
+        {
+          "info": { "name": "Get catalog variant", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/catalog-variants/{id}" },
+          "docs": "Retrieve information about a single catalog variant."
+        },
+        {
+          "info": { "name": "List catalog categories", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/catalog-categories" },
+          "docs": "Retrieve the list of catalog categories."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Store Products", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List store products", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/store/products" },
+          "docs": "Retrieve a list of products synced into the store."
+        },
+        {
+          "info": { "name": "Get store product", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/store/products/{id}" },
+          "docs": "Retrieve a single store product and its variants."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Orders", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List orders", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/orders" },
+          "docs": "Retrieve a list of orders."
+        },
+        {
+          "info": { "name": "Create order", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/orders",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Create a new order with itemized order building."
+        },
+        {
+          "info": { "name": "Get order", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/orders/{id}" },
+          "docs": "Retrieve a single order."
+        },
+        {
+          "info": { "name": "Confirm order", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.printful.com/v2/orders/{id}/confirm" },
+          "docs": "Confirm a draft order for fulfillment."
+        },
+        {
+          "info": { "name": "Create order estimation task", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/order-estimation-tasks",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Create an order cost estimation task."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Files", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Add file", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/files",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Add a print file to the file library."
+        },
+        {
+          "info": { "name": "Get file", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/files/{id}" },
+          "docs": "Retrieve information about a file in the library."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Mockup Generator", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create mockup task", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/mockup-tasks",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Create a mockup generator task."
+        },
+        {
+          "info": { "name": "Get mockup tasks", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/mockup-tasks" },
+          "docs": "Retrieve the status and results of mockup generation tasks."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Shipping Rates", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Calculate shipping rates", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/shipping-rates",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Calculate available shipping rates for items and a destination."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Warehouse", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List warehouse products", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/warehouse-products" },
+          "docs": "Retrieve a list of warehouse products."
+        },
+        {
+          "info": { "name": "Get warehouse product", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/warehouse-products/{id}" },
+          "docs": "Retrieve a single warehouse product."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Webhooks", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get webhooks", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/webhooks" },
+          "docs": "Retrieve the configured webhook settings."
+        },
+        {
+          "info": { "name": "Set webhooks", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/webhooks",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Set up webhook configuration."
+        },
+        {
+          "info": { "name": "Get webhook events", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.printful.com/v2/webhook-events" },
+          "docs": "Retrieve the configured webhook event subscriptions."
+        }
+      ]
+    }
+  ]
+}

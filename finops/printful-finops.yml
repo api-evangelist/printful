@@ -1,0 +1,113 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Printful
+providerId: printful
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: true
+tags:
+- Print on Demand
+- Fulfillment
+- Ecommerce
+- Dropshipping
+- Merchandise
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Printful spend. Printful charges no API fee; cost is driven by
+  per-order fulfillment - the per-product base cost (blank plus one standard
+  print placement), optional add-ons (extra print placements, inside labels,
+  embroidery digitization), and flat-rate shipping by category and destination.
+  An optional Printful Growth membership ($24.99/mo) reduces product costs by up
+  to 33%.
+notes: >-
+  Per-product and shipping rates vary by product, technique, and destination
+  and change over time. Verify current rates on the Printful pricing page
+  during reconciliation.
+sources:
+- https://www.printful.com/pricing
+- https://www.printful.com/plans
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Printful
+serviceCategory: Commerce and Fulfillment
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Per Order
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Printful
+  ServiceCategory: Commerce and Fulfillment
+  ProviderName: Printful
+  PublisherName: Printful
+  InvoiceIssuerName: Printful
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: product_fulfillment
+  description: Per-product base fulfillment cost (blank product plus one standard print placement).
+  unit: products
+  aggregation: sum
+  dimensions:
+  - store
+  - product
+  - technique
+- name: extra_placements
+  description: Additional print placements beyond the included standard placement.
+  unit: placements
+  aggregation: sum
+  dimensions:
+  - store
+  - product
+- name: branding_addons
+  description: Branding add-ons such as inside labels and packing inserts.
+  unit: items
+  aggregation: sum
+  dimensions:
+  - store
+  - product
+- name: embroidery_digitization
+  description: One-time embroidery digitization charge per design.
+  unit: designs
+  aggregation: sum
+  dimensions:
+  - store
+  - design
+- name: shipping
+  description: Flat-rate shipping billed per order by product category and destination.
+  unit: orders
+  aggregation: sum
+  dimensions:
+  - store
+  - destination
+  - category
+- name: membership_fee
+  description: Optional Printful Growth membership subscription fee.
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Pull Printful order and invoice exports; track fulfillment and shipping cost per order and product.
+- name: Allocation
+  description: Tag orders and stores per brand/storefront; map fulfillment cost to product lines.
+- name: Optimization
+  description: Evaluate the Growth membership against volume (up to 33% off); route orders to the nearest fulfillment center; minimize extra placements and add-ons.
+- name: Accountability
+  description: Review per-product margin (retail price minus fulfillment plus shipping) regularly against targets.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
