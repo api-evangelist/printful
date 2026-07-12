@@ -181,6 +181,14 @@ apis:
   description: Configure webhook endpoints and per-event subscriptions to receive push
     notifications for order, shipment, and product lifecycle events.
 common:
+- type: VulnerabilityDisclosure
+  url: security/printful-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/printful-domain-security.yml
+- type: Authentication
+  url: authentication/printful-authentication.yml
+- type: Blog
+  url: https://www.printful.com/blog/feed
 - type: GitHubOrganization
   url: https://github.com/printful
 - type: LinkedIn

@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/printful-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: OAuth 2.0 access token or private token passed as a Bearer token in the Authorization
+    header. Account-level tokens must also pass the target store via the X-PF-Store-Id header.
+  sources:
+  - openapi/printful-openapi.yml
