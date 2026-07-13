@@ -1,0 +1,13 @@
+{
+  "repo": "printful",
+  "feeds": [
+    {
+      "source": "https://www.printful.com/blog/feed",
+      "feed_url": "https://www.printful.com/blog/feed",
+      "title": "Printful Blog",
+      "saved": 4
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 9
+}
