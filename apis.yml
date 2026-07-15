@@ -181,6 +181,8 @@ apis:
   description: Configure webhook endpoints and per-event subscriptions to receive push
     notifications for order, shipment, and product lifecycle events.
 common:
+- type: AgenticAccess
+  url: agentic-access/printful-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/printful-vulnerability-disclosure.yml
 - type: DomainSecurity
