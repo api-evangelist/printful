@@ -1,0 +1,279 @@
+openapi: 3.0.1
+info:
+  title: Printful Catalog Orders API
+  description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
+  termsOfService: https://www.printful.com/policies/terms-of-service
+  contact:
+    name: Printful Developers
+    url: https://developers.printful.com/docs/
+  version: '2.0'
+servers:
+- url: https://api.printful.com
+  description: Printful API (v2 endpoints use the /v2 path prefix)
+security:
+- BearerAuth: []
+tags:
+- name: Orders
+  description: Create, confirm, and manage on-demand fulfillment orders and order items.
+paths:
+  /v2/orders:
+    get:
+      operationId: getOrders
+      tags:
+      - Orders
+      summary: Retrieve a list of orders.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: A paginated list of orders.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+    post:
+      operationId: createOrder
+      tags:
+      - Orders
+      summary: Create a new order with itemized order building.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: The created order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /v2/orders/{id}:
+    get:
+      operationId: getOrder
+      tags:
+      - Orders
+      summary: Retrieve a single order.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A single order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    patch:
+      operationId: updateOrder
+      tags:
+      - Orders
+      summary: Update a draft or failed order.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: The updated order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    delete:
+      operationId: deleteOrder
+      tags:
+      - Orders
+      summary: Delete a draft order.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: The order was deleted.
+  /v2/orders/{id}/confirm:
+    post:
+      operationId: confirmOrder
+      tags:
+      - Orders
+      summary: Confirm a draft order for fulfillment.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: The confirmed order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /v2/orders/{id}/order-items:
+    get:
+      operationId: getOrderItems
+      tags:
+      - Orders
+      summary: Retrieve the items of an order.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A list of order items.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/order-estimation-tasks:
+    post:
+      operationId: createOrderEstimationTask
+      tags:
+      - Orders
+      summary: Create an order cost estimation task.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: The estimation task.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Recipient:
+      type: object
+      properties:
+        name:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        state_code:
+          type: string
+          nullable: true
+        country_code:
+          type: string
+        zip:
+          type: string
+        phone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+    OrderList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        external_id:
+          type: string
+          nullable: true
+        store_id:
+          type: integer
+        status:
+          type: string
+          description: Order status (e.g. draft, pending, failed, canceled, fulfilled).
+        shipping:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        costs:
+          type: object
+    OrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        source:
+          type: string
+        catalog_variant_id:
+          type: integer
+        quantity:
+          type: integer
+        retail_price:
+          type: string
+        name:
+          type: string
+        placements:
+          type: array
+          items:
+            type: object
+    Paging:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+  parameters:
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return per page.
+      schema:
+        type: integer
+        default: 20
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Result set offset for pagination.
+      schema:
+        type: integer
+        default: 0
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token or private token passed as a Bearer token in the Authorization header. Account-level tokens must also pass the target store via the X-PF-Store-Id header.

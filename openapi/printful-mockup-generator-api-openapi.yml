@@ -1,0 +1,67 @@
+openapi: 3.0.1
+info:
+  title: Printful Catalog Mockup Generator API
+  description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
+  termsOfService: https://www.printful.com/policies/terms-of-service
+  contact:
+    name: Printful Developers
+    url: https://developers.printful.com/docs/
+  version: '2.0'
+servers:
+- url: https://api.printful.com
+  description: Printful API (v2 endpoints use the /v2 path prefix)
+security:
+- BearerAuth: []
+tags:
+- name: Mockup Generator
+  description: Generate product mockup images via asynchronous tasks.
+paths:
+  /v2/mockup-tasks:
+    get:
+      operationId: getMockupTasks
+      tags:
+      - Mockup Generator
+      summary: Retrieve the status and results of mockup generation tasks.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: Mockup task results.
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: createMockupTask
+      tags:
+      - Mockup Generator
+      summary: Create a mockup generator task.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: The created mockup task.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  parameters:
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token or private token passed as a Bearer token in the Authorization header. Account-level tokens must also pass the target store via the X-PF-Store-Id header.

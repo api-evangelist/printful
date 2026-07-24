@@ -1,0 +1,129 @@
+openapi: 3.0.1
+info:
+  title: Printful Catalog Webhooks API
+  description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
+  termsOfService: https://www.printful.com/policies/terms-of-service
+  contact:
+    name: Printful Developers
+    url: https://developers.printful.com/docs/
+  version: '2.0'
+servers:
+- url: https://api.printful.com
+  description: Printful API (v2 endpoints use the /v2 path prefix)
+security:
+- BearerAuth: []
+tags:
+- name: Webhooks
+  description: Configure webhook endpoints and per-event subscriptions.
+paths:
+  /v2/webhooks:
+    get:
+      operationId: getWebhooks
+      tags:
+      - Webhooks
+      summary: Retrieve the configured webhook settings.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: The webhook configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+    post:
+      operationId: setWebhooks
+      tags:
+      - Webhooks
+      summary: Set up webhook configuration.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Webhook'
+      responses:
+        '200':
+          description: The updated webhook configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+    delete:
+      operationId: disableWebhooks
+      tags:
+      - Webhooks
+      summary: Disable all webhooks.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: Webhooks disabled.
+  /v2/webhook-events:
+    get:
+      operationId: getWebhookEvents
+      tags:
+      - Webhooks
+      summary: Retrieve the configured webhook event subscriptions.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: The configured webhook events.
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: setWebhookEvents
+      tags:
+      - Webhooks
+      summary: Configure webhook event subscriptions.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: The updated webhook event subscriptions.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  parameters:
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
+  schemas:
+    Webhook:
+      type: object
+      properties:
+        default_url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              url:
+                type: string
+                format: uri
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token or private token passed as a Bearer token in the Authorization header. Account-level tokens must also pass the target store via the X-PF-Store-Id header.

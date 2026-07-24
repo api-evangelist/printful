@@ -1,0 +1,280 @@
+openapi: 3.0.1
+info:
+  title: Printful Catalog API
+  description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
+  termsOfService: https://www.printful.com/policies/terms-of-service
+  contact:
+    name: Printful Developers
+    url: https://developers.printful.com/docs/
+  version: '2.0'
+servers:
+- url: https://api.printful.com
+  description: Printful API (v2 endpoints use the /v2 path prefix)
+security:
+- BearerAuth: []
+tags:
+- name: Catalog
+  description: Browse the Printful product catalog, variants, prices, sizes, images, and availability.
+paths:
+  /v2/catalog-products:
+    get:
+      operationId: getCatalogProducts
+      tags:
+      - Catalog
+      summary: Retrieve a list of products available in Printful's catalog.
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: A paginated list of catalog products.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogProductList'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /v2/catalog-products/{id}:
+    get:
+      operationId: getCatalogProduct
+      tags:
+      - Catalog
+      summary: Retrieve information about a single catalog product.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: A single catalog product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogProduct'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v2/catalog-products/{id}/catalog-variants:
+    get:
+      operationId: getCatalogProductVariants
+      tags:
+      - Catalog
+      summary: Retrieve all variants of a catalog product.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: A list of variants for the product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogVariantList'
+  /v2/catalog-variants/{id}:
+    get:
+      operationId: getCatalogVariant
+      tags:
+      - Catalog
+      summary: Retrieve information about a single catalog variant.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: A single catalog variant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogVariant'
+  /v2/catalog-products/{id}/prices:
+    get:
+      operationId: getCatalogProductPrices
+      tags:
+      - Catalog
+      summary: Retrieve product and variant prices for a catalog product.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Pricing data for the product.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/catalog-products/{id}/availability:
+    get:
+      operationId: getCatalogProductAvailability
+      tags:
+      - Catalog
+      summary: Retrieve stock availability for a catalog product.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Availability data for the product.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/catalog-categories:
+    get:
+      operationId: getCatalogCategories
+      tags:
+      - Catalog
+      summary: Retrieve the list of catalog categories.
+      responses:
+        '200':
+          description: A list of catalog categories.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/catalog-products/{id}/mockup-styles:
+    get:
+      operationId: getCatalogProductMockupStyles
+      tags:
+      - Catalog
+      summary: Retrieve available mockup styles for a catalog product.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Mockup styles for the product.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/catalog-products/{id}/mockup-templates:
+    get:
+      operationId: getCatalogProductMockupTemplates
+      tags:
+      - Catalog
+      summary: Retrieve mockup templates for a catalog product.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Mockup templates for the product.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 Problem Details for HTTP APIs.
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+    CatalogVariant:
+      type: object
+      properties:
+        id:
+          type: integer
+        catalog_product_id:
+          type: integer
+        name:
+          type: string
+        size:
+          type: string
+        color:
+          type: string
+        color_code:
+          type: string
+        image:
+          type: string
+    CatalogVariantList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogVariant'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    CatalogProductList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogProduct'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    Paging:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+    CatalogProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        main_category_id:
+          type: integer
+        name:
+          type: string
+        brand:
+          type: string
+          nullable: true
+        model:
+          type: string
+        image:
+          type: string
+        variant_count:
+          type: integer
+        is_discontinued:
+          type: boolean
+        description:
+          type: string
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return per page.
+      schema:
+        type: integer
+        default: 20
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Result set offset for pagination.
+      schema:
+        type: integer
+        default: 0
+  responses:
+    NotFound:
+      description: The requested resource was not found (RFC 9457 problem details).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    TooManyRequests:
+      description: Rate limit exceeded (120 requests per 60 seconds).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token or private token passed as a Bearer token in the Authorization header. Account-level tokens must also pass the target store via the X-PF-Store-Id header.

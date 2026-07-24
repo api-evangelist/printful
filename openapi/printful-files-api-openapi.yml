@@ -1,0 +1,94 @@
+openapi: 3.0.1
+info:
+  title: Printful Catalog Files API
+  description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
+  termsOfService: https://www.printful.com/policies/terms-of-service
+  contact:
+    name: Printful Developers
+    url: https://developers.printful.com/docs/
+  version: '2.0'
+servers:
+- url: https://api.printful.com
+  description: Printful API (v2 endpoints use the /v2 path prefix)
+security:
+- BearerAuth: []
+tags:
+- name: Files
+  description: Upload and retrieve print files in the file library.
+paths:
+  /v2/files:
+    post:
+      operationId: createFile
+      tags:
+      - Files
+      summary: Add a print file to the file library.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+      responses:
+        '200':
+          description: The created file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+  /v2/files/{id}:
+    get:
+      operationId: getFile
+      tags:
+      - Files
+      summary: Retrieve information about a file in the library.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A single file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+components:
+  parameters:
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
+  schemas:
+    File:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        url:
+          type: string
+        filename:
+          type: string
+        mime_type:
+          type: string
+        size:
+          type: integer
+        status:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token or private token passed as a Bearer token in the Authorization header. Account-level tokens must also pass the target store via the X-PF-Store-Id header.

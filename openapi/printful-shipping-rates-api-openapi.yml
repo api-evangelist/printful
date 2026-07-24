@@ -1,0 +1,109 @@
+openapi: 3.0.1
+info:
+  title: Printful Catalog Shipping Rates API
+  description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
+  termsOfService: https://www.printful.com/policies/terms-of-service
+  contact:
+    name: Printful Developers
+    url: https://developers.printful.com/docs/
+  version: '2.0'
+servers:
+- url: https://api.printful.com
+  description: Printful API (v2 endpoints use the /v2 path prefix)
+security:
+- BearerAuth: []
+tags:
+- name: Shipping Rates
+  description: Calculate shipping rates for a set of items and destination.
+paths:
+  /v2/shipping-rates:
+    post:
+      operationId: calculateShippingRates
+      tags:
+      - Shipping Rates
+      summary: Calculate available shipping rates for items and a destination.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShippingRateRequest'
+      responses:
+        '200':
+          description: Available shipping rates.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Recipient:
+      type: object
+      properties:
+        name:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        state_code:
+          type: string
+          nullable: true
+        country_code:
+          type: string
+        zip:
+          type: string
+        phone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+    OrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        source:
+          type: string
+        catalog_variant_id:
+          type: integer
+        quantity:
+          type: integer
+        retail_price:
+          type: string
+        name:
+          type: string
+        placements:
+          type: array
+          items:
+            type: object
+    ShippingRateRequest:
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        currency:
+          type: string
+  parameters:
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token or private token passed as a Bearer token in the Authorization header. Account-level tokens must also pass the target store via the X-PF-Store-Id header.

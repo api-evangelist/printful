@@ -1,0 +1,70 @@
+openapi: 3.0.1
+info:
+  title: Printful Catalog Store Products API
+  description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
+  termsOfService: https://www.printful.com/policies/terms-of-service
+  contact:
+    name: Printful Developers
+    url: https://developers.printful.com/docs/
+  version: '2.0'
+servers:
+- url: https://api.printful.com
+  description: Printful API (v2 endpoints use the /v2 path prefix)
+security:
+- BearerAuth: []
+tags:
+- name: Store Products
+  description: Manage products synced into a connected store.
+paths:
+  /store/products:
+    get:
+      operationId: getStoreProducts
+      tags:
+      - Store Products
+      summary: Retrieve a list of products synced into the store.
+      parameters:
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A list of store products.
+          content:
+            application/json:
+              schema:
+                type: object
+  /store/products/{id}:
+    get:
+      operationId: getStoreProduct
+      tags:
+      - Store Products
+      summary: Retrieve a single store product and its variants.
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A single store product.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  parameters:
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token or private token passed as a Bearer token in the Authorization header. Account-level tokens must also pass the target store via the X-PF-Store-Id header.
