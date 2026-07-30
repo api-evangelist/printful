@@ -7,7 +7,20 @@ description: Printful is a print-on-demand and order-fulfillment platform that l
   Printful API (v2 and v1) exposes the product catalog, store products, order management,
   file library, mockup generator, shipping rates, warehouse products, and webhooks
   over a REST interface authenticated with OAuth 2.0 / Bearer tokens.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/printful.png
 tags:
 - Print on Demand
 - Fulfillment
@@ -18,168 +31,166 @@ created: '2026-06-25'
 modified: '2026-06-25'
 specificationVersion: '0.19'
 apis:
-- aid: printful:catalog
+- aid: printful:printful-catalog-api
   name: Printful Catalog API
+  description: Browse the Printful product catalog, variants, prices, sizes, images, and availability.
+  humanURL: https://developers.printful.com/docs/v2-beta/
+  baseURL: https://api.printful.com/v2
   tags:
   - Catalog
-  - Products
-  - Variants
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.printful.com/docs/v2-beta/
-  baseURL: https://api.printful.com/v2
   properties:
-  - url: https://developers.printful.com/docs/v2-beta/
-    type: Documentation
-  - url: https://developers.printful.com/docs/v2-beta/
-    type: APIReference
-  - url: openapi/printful-openapi.yml
-    type: OpenAPI
-  - url: collections/printful.postman_collection.json
-    type: PostmanCollection
-  - url: collections/printful.opencollection.json
-    type: OpenCollection
-  description: Browse Printful's print-on-demand catalog - products, variants, prices,
-    sizes, images, availability, categories, and mockup styles/templates.
-- aid: printful:store-products
-  name: Printful Store Products API
-  tags:
-  - Store Products
-  - Sync
-  - Variants
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.printful.com/docs/
-  baseURL: https://api.printful.com
-  properties:
-  - url: https://developers.printful.com/docs/
-    type: Documentation
-  - url: openapi/printful-openapi.yml
-    type: OpenAPI
-  - url: collections/printful.postman_collection.json
-    type: PostmanCollection
-  - url: collections/printful.opencollection.json
-    type: OpenCollection
-  description: Manage the products synced into a connected store, including store product
-    and store variant records that map catalog items to a merchant's storefront.
-- aid: printful:orders
-  name: Printful Orders API
-  tags:
-  - Orders
-  - Fulfillment
-  - Order Items
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.printful.com/docs/v2-beta/
-  baseURL: https://api.printful.com/v2
-  properties:
-  - url: https://developers.printful.com/docs/v2-beta/
-    type: Documentation
-  - url: openapi/printful-openapi.yml
-    type: OpenAPI
-  - url: collections/printful.postman_collection.json
-    type: PostmanCollection
-  - url: collections/printful.opencollection.json
-    type: OpenCollection
-  description: Create, update, confirm, and manage orders and order items for on-demand
-    fulfillment, plus order cost estimation tasks and shipment tracking.
-- aid: printful:files
+  - type: OpenAPI
+    url: openapi/printful-catalog-api-openapi.yml
+  - type: Documentation
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: APIReference
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: PostmanCollection
+    url: collections/printful.postman_collection.json
+  - type: OpenCollection
+    url: collections/printful.opencollection.json
+  - type: Documentation
+    url: https://developers.printful.com/docs/
+- aid: printful:printful-files-api
   name: Printful Files API
+  description: Upload and retrieve print files in the file library.
+  humanURL: https://developers.printful.com/docs/v2-beta/
+  baseURL: https://api.printful.com/v2
   tags:
   - Files
-  - File Library
-  - Uploads
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/printful-files-api-openapi.yml
+  - type: Documentation
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: APIReference
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: PostmanCollection
+    url: collections/printful.postman_collection.json
+  - type: OpenCollection
+    url: collections/printful.opencollection.json
+  - type: Documentation
+    url: https://developers.printful.com/docs/
+- aid: printful:printful-mockup-generator-api
+  name: Printful Mockup Generator API
+  description: Generate product mockup images via asynchronous tasks.
   humanURL: https://developers.printful.com/docs/v2-beta/
   baseURL: https://api.printful.com/v2
-  properties:
-  - url: https://developers.printful.com/docs/v2-beta/
-    type: Documentation
-  - url: openapi/printful-openapi.yml
-    type: OpenAPI
-  - url: collections/printful.postman_collection.json
-    type: PostmanCollection
-  - url: collections/printful.opencollection.json
-    type: OpenCollection
-  description: Upload and retrieve print files in the Printful file library for use
-    on products and orders.
-- aid: printful:mockup-generator
-  name: Printful Mockup Generator API
   tags:
   - Mockup Generator
-  - Mockups
-  - Images
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/printful-mockup-generator-api-openapi.yml
+  - type: Documentation
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: APIReference
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: PostmanCollection
+    url: collections/printful.postman_collection.json
+  - type: OpenCollection
+    url: collections/printful.opencollection.json
+  - type: Documentation
+    url: https://developers.printful.com/docs/
+- aid: printful:printful-orders-api
+  name: Printful Orders API
+  description: Create, confirm, and manage on-demand fulfillment orders and order items.
   humanURL: https://developers.printful.com/docs/v2-beta/
   baseURL: https://api.printful.com/v2
-  properties:
-  - url: https://developers.printful.com/docs/v2-beta/
-    type: Documentation
-  - url: openapi/printful-openapi.yml
-    type: OpenAPI
-  - url: collections/printful.postman_collection.json
-    type: PostmanCollection
-  - url: collections/printful.opencollection.json
-    type: OpenCollection
-  description: Generate product mockup images asynchronously via mockup tasks, using
-    catalog mockup styles and templates.
-- aid: printful:shipping-rates
-  name: Printful Shipping Rates API
   tags:
-  - Shipping
-  - Rates
-  - Logistics
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/printful-orders-api-openapi.yml
+  - type: Documentation
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: APIReference
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: PostmanCollection
+    url: collections/printful.postman_collection.json
+  - type: OpenCollection
+    url: collections/printful.opencollection.json
+  - type: Documentation
+    url: https://developers.printful.com/docs/
+- aid: printful:printful-shipping-rates-api
+  name: Printful Shipping Rates API
+  description: Calculate shipping rates for a set of items and destination.
   humanURL: https://developers.printful.com/docs/v2-beta/
   baseURL: https://api.printful.com/v2
+  tags:
+  - Shipping Rates
   properties:
-  - url: https://developers.printful.com/docs/v2-beta/
-    type: Documentation
-  - url: openapi/printful-openapi.yml
-    type: OpenAPI
-  - url: collections/printful.postman_collection.json
-    type: PostmanCollection
-  - url: collections/printful.opencollection.json
-    type: OpenCollection
-  description: Calculate available shipping rates and delivery options for a set of
-    items shipped to a given destination.
-- aid: printful:warehouse
+  - type: OpenAPI
+    url: openapi/printful-shipping-rates-api-openapi.yml
+  - type: Documentation
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: APIReference
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: PostmanCollection
+    url: collections/printful.postman_collection.json
+  - type: OpenCollection
+    url: collections/printful.opencollection.json
+  - type: Documentation
+    url: https://developers.printful.com/docs/
+- aid: printful:printful-store-products-api
+  name: Printful Store Products API
+  description: Manage products synced into a connected store.
+  humanURL: https://developers.printful.com/docs/v2-beta/
+  baseURL: https://api.printful.com/v2
+  tags:
+  - Store Products
+  properties:
+  - type: OpenAPI
+    url: openapi/printful-store-products-api-openapi.yml
+  - type: Documentation
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: APIReference
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: PostmanCollection
+    url: collections/printful.postman_collection.json
+  - type: OpenCollection
+    url: collections/printful.opencollection.json
+  - type: Documentation
+    url: https://developers.printful.com/docs/
+- aid: printful:printful-warehouse-api
   name: Printful Warehouse API
+  description: List and retrieve merchant-owned warehouse products.
+  humanURL: https://developers.printful.com/docs/v2-beta/
+  baseURL: https://api.printful.com/v2
   tags:
   - Warehouse
-  - Inventory
-  - Products
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/printful-warehouse-api-openapi.yml
+  - type: Documentation
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: APIReference
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: PostmanCollection
+    url: collections/printful.postman_collection.json
+  - type: OpenCollection
+    url: collections/printful.opencollection.json
+  - type: Documentation
+    url: https://developers.printful.com/docs/
+- aid: printful:printful-webhooks-api
+  name: Printful Webhooks API
+  description: Configure webhook endpoints and per-event subscriptions.
   humanURL: https://developers.printful.com/docs/v2-beta/
   baseURL: https://api.printful.com/v2
-  properties:
-  - url: https://developers.printful.com/docs/v2-beta/
-    type: Documentation
-  - url: openapi/printful-openapi.yml
-    type: OpenAPI
-  - url: collections/printful.postman_collection.json
-    type: PostmanCollection
-  - url: collections/printful.opencollection.json
-    type: OpenCollection
-  description: List and retrieve warehouse products - merchant-owned inventory stored
-    in Printful warehouses for pick, pack, and ship fulfillment.
-- aid: printful:webhooks
-  name: Printful Webhooks API
   tags:
   - Webhooks
-  - Events
-  - Notifications
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.printful.com/docs/v2-beta/
-  baseURL: https://api.printful.com/v2
   properties:
-  - url: https://developers.printful.com/docs/v2-beta/
-    type: Documentation
-  - url: openapi/printful-openapi.yml
-    type: OpenAPI
-  - url: collections/printful.postman_collection.json
-    type: PostmanCollection
-  - url: collections/printful.opencollection.json
-    type: OpenCollection
-  description: Configure webhook endpoints and per-event subscriptions to receive push
-    notifications for order, shipment, and product lifecycle events.
+  - type: OpenAPI
+    url: openapi/printful-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: APIReference
+    url: https://developers.printful.com/docs/v2-beta/
+  - type: PostmanCollection
+    url: collections/printful.postman_collection.json
+  - type: OpenCollection
+    url: collections/printful.opencollection.json
+  - type: Documentation
+    url: https://developers.printful.com/docs/
 common:
 - type: AgenticAccess
   url: agentic-access/printful-agentic-access.yml
