@@ -1,0 +1,28 @@
+{
+  "provider": "printful",
+  "sources": [
+    "printful-catalog-api-openapi.yml",
+    "printful-files-api-openapi.yml",
+    "printful-mockup-generator-api-openapi.yml",
+    "printful-orders-api-openapi.yml",
+    "printful-shipping-rates-api-openapi.yml",
+    "printful-store-products-api-openapi.yml",
+    "printful-warehouse-api-openapi.yml",
+    "printful-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "printful-catalog-api-openapi.yml",
+    "printful-files-api-openapi.yml",
+    "printful-mockup-generator-api-openapi.yml",
+    "printful-orders-api-openapi.yml",
+    "printful-shipping-rates-api-openapi.yml",
+    "printful-store-products-api-openapi.yml",
+    "printful-warehouse-api-openapi.yml",
+    "printful-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

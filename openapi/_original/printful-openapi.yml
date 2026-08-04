@@ -1,0 +1,808 @@
+openapi: 3.0.1
+info:
+  title: Printful API
+  description: >-
+    Specification of the Printful print-on-demand and order-fulfillment API.
+    The v2 API (Open Beta) is served under the /v2 prefix at
+    https://api.printful.com and covers the product catalog, orders, files,
+    the mockup generator, shipping rates, warehouse products, and webhooks.
+    Authentication uses OAuth 2.0 access tokens or private tokens passed as a
+    Bearer token in the Authorization header; account-level tokens additionally
+    pass the target store via the X-PF-Store-Id header.
+  termsOfService: https://www.printful.com/policies/terms-of-service
+  contact:
+    name: Printful Developers
+    url: https://developers.printful.com/docs/
+  version: '2.0'
+servers:
+  - url: https://api.printful.com
+    description: Printful API (v2 endpoints use the /v2 path prefix)
+security:
+  - BearerAuth: []
+tags:
+  - name: Catalog
+    description: Browse the Printful product catalog, variants, prices, sizes, images, and availability.
+  - name: Store Products
+    description: Manage products synced into a connected store.
+  - name: Orders
+    description: Create, confirm, and manage on-demand fulfillment orders and order items.
+  - name: Files
+    description: Upload and retrieve print files in the file library.
+  - name: Mockup Generator
+    description: Generate product mockup images via asynchronous tasks.
+  - name: Shipping Rates
+    description: Calculate shipping rates for a set of items and destination.
+  - name: Warehouse
+    description: List and retrieve merchant-owned warehouse products.
+  - name: Webhooks
+    description: Configure webhook endpoints and per-event subscriptions.
+paths:
+  /v2/catalog-products:
+    get:
+      operationId: getCatalogProducts
+      tags:
+        - Catalog
+      summary: Retrieve a list of products available in Printful's catalog.
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: A paginated list of catalog products.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogProductList'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /v2/catalog-products/{id}:
+    get:
+      operationId: getCatalogProduct
+      tags:
+        - Catalog
+      summary: Retrieve information about a single catalog product.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: A single catalog product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogProduct'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v2/catalog-products/{id}/catalog-variants:
+    get:
+      operationId: getCatalogProductVariants
+      tags:
+        - Catalog
+      summary: Retrieve all variants of a catalog product.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: A list of variants for the product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogVariantList'
+  /v2/catalog-variants/{id}:
+    get:
+      operationId: getCatalogVariant
+      tags:
+        - Catalog
+      summary: Retrieve information about a single catalog variant.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: A single catalog variant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogVariant'
+  /v2/catalog-products/{id}/prices:
+    get:
+      operationId: getCatalogProductPrices
+      tags:
+        - Catalog
+      summary: Retrieve product and variant prices for a catalog product.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Pricing data for the product.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/catalog-products/{id}/availability:
+    get:
+      operationId: getCatalogProductAvailability
+      tags:
+        - Catalog
+      summary: Retrieve stock availability for a catalog product.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Availability data for the product.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/catalog-categories:
+    get:
+      operationId: getCatalogCategories
+      tags:
+        - Catalog
+      summary: Retrieve the list of catalog categories.
+      responses:
+        '200':
+          description: A list of catalog categories.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/catalog-products/{id}/mockup-styles:
+    get:
+      operationId: getCatalogProductMockupStyles
+      tags:
+        - Catalog
+      summary: Retrieve available mockup styles for a catalog product.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Mockup styles for the product.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/catalog-products/{id}/mockup-templates:
+    get:
+      operationId: getCatalogProductMockupTemplates
+      tags:
+        - Catalog
+      summary: Retrieve mockup templates for a catalog product.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: Mockup templates for the product.
+          content:
+            application/json:
+              schema:
+                type: object
+  /store/products:
+    get:
+      operationId: getStoreProducts
+      tags:
+        - Store Products
+      summary: Retrieve a list of products synced into the store.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A list of store products.
+          content:
+            application/json:
+              schema:
+                type: object
+  /store/products/{id}:
+    get:
+      operationId: getStoreProduct
+      tags:
+        - Store Products
+      summary: Retrieve a single store product and its variants.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A single store product.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/orders:
+    get:
+      operationId: getOrders
+      tags:
+        - Orders
+      summary: Retrieve a list of orders.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: A paginated list of orders.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+    post:
+      operationId: createOrder
+      tags:
+        - Orders
+      summary: Create a new order with itemized order building.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: The created order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /v2/orders/{id}:
+    get:
+      operationId: getOrder
+      tags:
+        - Orders
+      summary: Retrieve a single order.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A single order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    patch:
+      operationId: updateOrder
+      tags:
+        - Orders
+      summary: Update a draft or failed order.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: The updated order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    delete:
+      operationId: deleteOrder
+      tags:
+        - Orders
+      summary: Delete a draft order.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: The order was deleted.
+  /v2/orders/{id}/confirm:
+    post:
+      operationId: confirmOrder
+      tags:
+        - Orders
+      summary: Confirm a draft order for fulfillment.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: The confirmed order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /v2/orders/{id}/order-items:
+    get:
+      operationId: getOrderItems
+      tags:
+        - Orders
+      summary: Retrieve the items of an order.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A list of order items.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/order-estimation-tasks:
+    post:
+      operationId: createOrderEstimationTask
+      tags:
+        - Orders
+      summary: Create an order cost estimation task.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: The estimation task.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/files:
+    post:
+      operationId: createFile
+      tags:
+        - Files
+      summary: Add a print file to the file library.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+      responses:
+        '200':
+          description: The created file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+  /v2/files/{id}:
+    get:
+      operationId: getFile
+      tags:
+        - Files
+      summary: Retrieve information about a file in the library.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A single file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+  /v2/mockup-tasks:
+    get:
+      operationId: getMockupTasks
+      tags:
+        - Mockup Generator
+      summary: Retrieve the status and results of mockup generation tasks.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: Mockup task results.
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: createMockupTask
+      tags:
+        - Mockup Generator
+      summary: Create a mockup generator task.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: The created mockup task.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/shipping-rates:
+    post:
+      operationId: calculateShippingRates
+      tags:
+        - Shipping Rates
+      summary: Calculate available shipping rates for items and a destination.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShippingRateRequest'
+      responses:
+        '200':
+          description: Available shipping rates.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/warehouse-products:
+    get:
+      operationId: getWarehouseProducts
+      tags:
+        - Warehouse
+      summary: Retrieve a list of warehouse products.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: A list of warehouse products.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/warehouse-products/{id}:
+    get:
+      operationId: getWarehouseProduct
+      tags:
+        - Warehouse
+      summary: Retrieve a single warehouse product.
+      parameters:
+        - $ref: '#/components/parameters/PathId'
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: A single warehouse product.
+          content:
+            application/json:
+              schema:
+                type: object
+  /v2/webhooks:
+    get:
+      operationId: getWebhooks
+      tags:
+        - Webhooks
+      summary: Retrieve the configured webhook settings.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: The webhook configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+    post:
+      operationId: setWebhooks
+      tags:
+        - Webhooks
+      summary: Set up webhook configuration.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Webhook'
+      responses:
+        '200':
+          description: The updated webhook configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+    delete:
+      operationId: disableWebhooks
+      tags:
+        - Webhooks
+      summary: Disable all webhooks.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: Webhooks disabled.
+  /v2/webhook-events:
+    get:
+      operationId: getWebhookEvents
+      tags:
+        - Webhooks
+      summary: Retrieve the configured webhook event subscriptions.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      responses:
+        '200':
+          description: The configured webhook events.
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      operationId: setWebhookEvents
+      tags:
+        - Webhooks
+      summary: Configure webhook event subscriptions.
+      parameters:
+        - $ref: '#/components/parameters/StoreIdHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: The updated webhook event subscriptions.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        OAuth 2.0 access token or private token passed as a Bearer token in the
+        Authorization header. Account-level tokens must also pass the target
+        store via the X-PF-Store-Id header.
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return per page.
+      schema:
+        type: integer
+        default: 20
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Result set offset for pagination.
+      schema:
+        type: integer
+        default: 0
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: >-
+        Target store id. Required when using an account-level OAuth token to
+        scope the request to a specific store.
+      schema:
+        type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found (RFC 9457 problem details).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    TooManyRequests:
+      description: Rate limit exceeded (120 requests per 60 seconds).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  schemas:
+    CatalogProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        main_category_id:
+          type: integer
+        name:
+          type: string
+        brand:
+          type: string
+          nullable: true
+        model:
+          type: string
+        image:
+          type: string
+        variant_count:
+          type: integer
+        is_discontinued:
+          type: boolean
+        description:
+          type: string
+    CatalogProductList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogProduct'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    CatalogVariant:
+      type: object
+      properties:
+        id:
+          type: integer
+        catalog_product_id:
+          type: integer
+        name:
+          type: string
+        size:
+          type: string
+        color:
+          type: string
+        color_code:
+          type: string
+        image:
+          type: string
+    CatalogVariantList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogVariant'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+        external_id:
+          type: string
+          nullable: true
+        store_id:
+          type: integer
+        status:
+          type: string
+          description: Order status (e.g. draft, pending, failed, canceled, fulfilled).
+        shipping:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        costs:
+          type: object
+    OrderList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    OrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        source:
+          type: string
+        catalog_variant_id:
+          type: integer
+        quantity:
+          type: integer
+        retail_price:
+          type: string
+        name:
+          type: string
+        placements:
+          type: array
+          items:
+            type: object
+    Recipient:
+      type: object
+      properties:
+        name:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        state_code:
+          type: string
+          nullable: true
+        country_code:
+          type: string
+        zip:
+          type: string
+        phone:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+    File:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        url:
+          type: string
+        filename:
+          type: string
+        mime_type:
+          type: string
+        size:
+          type: integer
+        status:
+          type: string
+    ShippingRateRequest:
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        currency:
+          type: string
+    Webhook:
+      type: object
+      properties:
+        default_url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              url:
+                type: string
+                format: uri
+    Paging:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+    Problem:
+      type: object
+      description: RFC 9457 Problem Details for HTTP APIs.
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
