@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Printful Catalog API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of products available in Printful's catalog.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/catalog-products",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result set offset for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of products available in Printful's catalog."
+        },
+        {
+          "info": {
+            "name": "Retrieve information about a single catalog product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/catalog-products/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve information about a single catalog product."
+        },
+        {
+          "info": {
+            "name": "Retrieve all variants of a catalog product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/catalog-products/:id/catalog-variants",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve all variants of a catalog product."
+        },
+        {
+          "info": {
+            "name": "Retrieve information about a single catalog variant.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/catalog-variants/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve information about a single catalog variant."
+        },
+        {
+          "info": {
+            "name": "Retrieve product and variant prices for a catalog product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/catalog-products/:id/prices",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve product and variant prices for a catalog product."
+        },
+        {
+          "info": {
+            "name": "Retrieve stock availability for a catalog product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/catalog-products/:id/availability",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve stock availability for a catalog product."
+        },
+        {
+          "info": {
+            "name": "Retrieve the list of catalog categories.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/catalog-categories"
+          },
+          "docs": "Retrieve the list of catalog categories."
+        },
+        {
+          "info": {
+            "name": "Retrieve available mockup styles for a catalog product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/catalog-products/:id/mockup-styles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve available mockup styles for a catalog product."
+        },
+        {
+          "info": {
+            "name": "Retrieve mockup templates for a catalog product.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/catalog-products/:id/mockup-templates",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve mockup templates for a catalog product."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

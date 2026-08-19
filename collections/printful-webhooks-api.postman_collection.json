@@ -1,0 +1,520 @@
+{
+  "item": [
+    {
+      "id": "4f2ba165-57f1-4c0e-acae-12b39fc46d78",
+      "name": "Webhooks",
+      "description": {
+        "content": "Configure webhook endpoints and per-event subscriptions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d5823f2-2053-4969-b21c-9798e031abd7",
+          "name": "Retrieve the configured webhook settings.",
+          "request": {
+            "name": "Retrieve the configured webhook settings.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9def9361-4f6c-44e7-81a5-a7778aa4edbe",
+              "name": "The webhook configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"default_url\": \"https://vlzXbuDjvpcgGLiWJKGWtxHT.etbguaWT5M33zHhK\",\n  \"events\": [\n    {\n      \"type\": \"string\",\n      \"url\": \"http://nYbCVECznAdhQTcPCGIqJ.mtxKmVN,dNXcx3DKCdmMEbZ5anrxwfbHcegNRbCi2fj7-R+NMpJigb6FTcqK6dVA\"\n    },\n    {\n      \"type\": \"string\",\n      \"url\": \"https://PQ.twrli32pnBBnPXIYoDY4LgeUITWTWFiw2QfoTMEGc\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7adb9f64-e085-4ce4-af0b-0bb112af2fce",
+          "name": "Set up webhook configuration.",
+          "request": {
+            "name": "Set up webhook configuration.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"default_url\": \"<uri>\",\n  \"events\": [\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a17ac1cf-a0b9-4517-a511-c8e83b7e60af",
+              "name": "The updated webhook configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"default_url\": \"<uri>\",\n  \"events\": [\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"default_url\": \"<uri>\",\n  \"events\": [\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7dee8e1e-d54a-4c1e-adc9-7259a5574e5e",
+          "name": "Disable all webhooks.",
+          "request": {
+            "name": "Disable all webhooks.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67a34a34-1d02-4fc0-8b9c-d6ca39db99fd",
+              "name": "Webhooks disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "347e8054-ecc2-45e2-a1af-aa8d44c682fa",
+          "name": "Retrieve the configured webhook event subscriptions.",
+          "request": {
+            "name": "Retrieve the configured webhook event subscriptions.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "webhook-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6cef8448-d3e9-4dfa-9308-e4b0ce50c194",
+              "name": "The configured webhook events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "webhook-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3468fa73-8dac-489e-9569-c5b068cd2496",
+          "name": "Configure webhook event subscriptions.",
+          "request": {
+            "name": "Configure webhook event subscriptions.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "webhook-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d7902c48-2729-40ad-8cb9-8b2f91d25b11",
+              "name": "The updated webhook event subscriptions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "webhook-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.printful.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6da05e5e-80fc-4a36-89f9-a611385d835f",
+    "name": "Printful Catalog Webhooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.\n\nContact Support:\n Name: Printful Developers",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Printful Catalog Orders API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of orders.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/orders",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Result set offset for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of orders."
+        },
+        {
+          "info": {
+            "name": "Create a new order with itemized order building.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/orders",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new order with itemized order building."
+        },
+        {
+          "info": {
+            "name": "Retrieve a single order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/orders/:id",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single order."
+        },
+        {
+          "info": {
+            "name": "Update a draft or failed order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.printful.com/v2/orders/:id",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a draft or failed order."
+        },
+        {
+          "info": {
+            "name": "Delete a draft order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.printful.com/v2/orders/:id",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Delete a draft order."
+        },
+        {
+          "info": {
+            "name": "Confirm a draft order for fulfillment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/orders/:id/confirm",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Confirm a draft order for fulfillment."
+        },
+        {
+          "info": {
+            "name": "Retrieve the items of an order.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/orders/:id/order-items",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the items of an order."
+        },
+        {
+          "info": {
+            "name": "Create an order cost estimation task.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/order-estimation-tasks",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an order cost estimation task."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

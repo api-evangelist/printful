@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Printful Catalog Shipping Rates API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipping Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate available shipping rates for items and a destination.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/shipping-rates",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculate available shipping rates for items and a destination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

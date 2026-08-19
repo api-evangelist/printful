@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Printful Catalog Files API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add a print file to the file library.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/files",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a print file to the file library."
+        },
+        {
+          "info": {
+            "name": "Retrieve information about a file in the library.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/files/:id",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The resource identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve information about a file in the library."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

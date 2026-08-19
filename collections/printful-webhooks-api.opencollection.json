@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Printful Catalog Webhooks API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the configured webhook settings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/webhooks",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the configured webhook settings."
+        },
+        {
+          "info": {
+            "name": "Set up webhook configuration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/webhooks",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set up webhook configuration."
+        },
+        {
+          "info": {
+            "name": "Disable all webhooks.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.printful.com/v2/webhooks",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Disable all webhooks."
+        },
+        {
+          "info": {
+            "name": "Retrieve the configured webhook event subscriptions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/webhook-events",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the configured webhook event subscriptions."
+        },
+        {
+          "info": {
+            "name": "Configure webhook event subscriptions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/webhook-events",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configure webhook event subscriptions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

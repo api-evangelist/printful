@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Printful Catalog Mockup Generator API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mockup Generator",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the status and results of mockup generation tasks.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.printful.com/v2/mockup-tasks",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the status and results of mockup generation tasks."
+        },
+        {
+          "info": {
+            "name": "Create a mockup generator task.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.printful.com/v2/mockup-tasks",
+            "headers": [
+              {
+                "name": "X-PF-Store-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a mockup generator task."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

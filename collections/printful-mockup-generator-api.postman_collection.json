@@ -1,0 +1,240 @@
+{
+  "item": [
+    {
+      "id": "a5c364c3-db05-4496-90ee-c26bf5b9172a",
+      "name": "Mockup Generator",
+      "description": {
+        "content": "Generate product mockup images via asynchronous tasks.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8015e0ae-6af2-4062-9c72-3964483142df",
+          "name": "Retrieve the status and results of mockup generation tasks.",
+          "request": {
+            "name": "Retrieve the status and results of mockup generation tasks.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "mockup-tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3d64b53-05c8-4eb4-89bd-936d891e0144",
+              "name": "Mockup task results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "mockup-tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0dc3f37-f050-4fe0-a469-f836d418226b",
+          "name": "Create a mockup generator task.",
+          "request": {
+            "name": "Create a mockup generator task.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "mockup-tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4517642e-2a35-4132-acce-4403bcfe16b8",
+              "name": "The created mockup task.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "mockup-tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.printful.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "992a840a-5b98-4c70-bb17-46347800e838",
+    "name": "Printful Catalog Mockup Generator API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.\n\nContact Support:\n Name: Printful Developers",
+      "type": "text/plain"
+    }
+  }
+}

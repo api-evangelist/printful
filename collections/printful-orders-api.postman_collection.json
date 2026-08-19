@@ -1,0 +1,924 @@
+{
+  "item": [
+    {
+      "id": "432ecf5a-85c1-48b6-aa6d-5d55a5a54bb7",
+      "name": "Orders",
+      "description": {
+        "content": "Create, confirm, and manage on-demand fulfillment orders and order items.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7ed3aee-e0f2-4aba-b559-d4ec09749bf0",
+          "name": "Retrieve a list of orders.",
+          "request": {
+            "name": "Retrieve a list of orders.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of items to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Result set offset for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf1d5752-2fae-45f8-9546-61f8c5d9afe2",
+              "name": "A paginated list of orders.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1144,\n      \"external_id\": \"string\",\n      \"store_id\": 6676,\n      \"status\": \"string\",\n      \"shipping\": \"string\",\n      \"recipient\": {\n        \"name\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state_code\": \"string\",\n        \"country_code\": \"string\",\n        \"zip\": \"string\",\n        \"phone\": \"string\",\n        \"email\": \"string\"\n      },\n      \"order_items\": [\n        {\n          \"id\": 6393,\n          \"source\": \"string\",\n          \"catalog_variant_id\": 4759,\n          \"quantity\": 2711,\n          \"retail_price\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"id\": 2592,\n          \"source\": \"string\",\n          \"catalog_variant_id\": 9001,\n          \"quantity\": 9181,\n          \"retail_price\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"costs\": {}\n    },\n    {\n      \"id\": 9075,\n      \"external_id\": \"string\",\n      \"store_id\": 427,\n      \"status\": \"string\",\n      \"shipping\": \"string\",\n      \"recipient\": {\n        \"name\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state_code\": \"string\",\n        \"country_code\": \"string\",\n        \"zip\": \"string\",\n        \"phone\": \"string\",\n        \"email\": \"string\"\n      },\n      \"order_items\": [\n        {\n          \"id\": 452,\n          \"source\": \"string\",\n          \"catalog_variant_id\": 4264,\n          \"quantity\": 8464,\n          \"retail_price\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"id\": 6033,\n          \"source\": \"string\",\n          \"catalog_variant_id\": 2166,\n          \"quantity\": 1235,\n          \"retail_price\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"costs\": {}\n    }\n  ],\n  \"paging\": {\n    \"total\": 8519,\n    \"offset\": 9472,\n    \"limit\": 5593\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42563b13-7a48-45ec-859d-eee14b7475b8",
+          "name": "Create a new order with itemized order building.",
+          "request": {
+            "name": "Create a new order with itemized order building.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"external_id\": \"<string>\",\n  \"store_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"shipping\": \"<string>\",\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"order_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"costs\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5cd1d859-07ce-4b36-9ed6-40aa4d22d963",
+              "name": "The created order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"external_id\": \"<string>\",\n  \"store_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"shipping\": \"<string>\",\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"order_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"costs\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"external_id\": \"<string>\",\n  \"store_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"shipping\": \"<string>\",\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"order_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"costs\": \"<object>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42d5f6eb-9de1-41f9-98c2-631f6f08966e",
+          "name": "Retrieve a single order.",
+          "request": {
+            "name": "Retrieve a single order.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The resource identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a45c3c8b-7fbe-4dfb-9821-3420eb59053f",
+              "name": "A single order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"external_id\": \"<string>\",\n  \"store_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"shipping\": \"<string>\",\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"order_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"costs\": \"<object>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3a7a0af-15fe-4e79-bacd-56c888a3310b",
+          "name": "Update a draft or failed order.",
+          "request": {
+            "name": "Update a draft or failed order.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The resource identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"external_id\": \"<string>\",\n  \"store_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"shipping\": \"<string>\",\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"order_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"costs\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7beeacd7-8acc-4aff-b93d-60d9e59fb4b2",
+              "name": "The updated order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"external_id\": \"<string>\",\n  \"store_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"shipping\": \"<string>\",\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"order_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"costs\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"external_id\": \"<string>\",\n  \"store_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"shipping\": \"<string>\",\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"order_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"costs\": \"<object>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80a9a805-f4c0-4b00-8b4a-7e2a3a649c63",
+          "name": "Delete a draft order.",
+          "request": {
+            "name": "Delete a draft order.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The resource identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5fafbb58-aabd-4eab-b89b-d5253fcd522a",
+              "name": "The order was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef41e65e-e939-4c25-b20f-765b2508f834",
+          "name": "Confirm a draft order for fulfillment.",
+          "request": {
+            "name": "Confirm a draft order for fulfillment.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":id",
+                "confirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The resource identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "349c96e0-3aeb-4317-87aa-d19f3380e63b",
+              "name": "The confirmed order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<integer>\",\n  \"external_id\": \"<string>\",\n  \"store_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"shipping\": \"<string>\",\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"order_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"costs\": \"<object>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e78115b-7896-4cab-a858-adacb22610d0",
+          "name": "Retrieve the items of an order.",
+          "request": {
+            "name": "Retrieve the items of an order.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":id",
+                "order-items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The resource identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92e05722-24d8-4f2e-a9c0-37f017f8785a",
+              "name": "A list of order items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id",
+                    "order-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The resource identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "842543f5-ecf7-4d82-bcde-1030bd262028",
+          "name": "Create an order cost estimation task.",
+          "request": {
+            "name": "Create an order cost estimation task.",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "order-estimation-tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                "key": "X-PF-Store-Id",
+                "value": "<integer>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<integer>\",\n  \"external_id\": \"<string>\",\n  \"store_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"shipping\": \"<string>\",\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"order_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"costs\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c26f065-b566-4d63-9eb2-b381a0e40b1e",
+              "name": "The estimation task.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "order-estimation-tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Target store id. Required when using an account-level OAuth token to scope the request to a specific store.",
+                    "key": "X-PF-Store-Id",
+                    "value": "<integer>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"external_id\": \"<string>\",\n  \"store_id\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"shipping\": \"<string>\",\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"order_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"source\": \"<string>\",\n      \"catalog_variant_id\": \"<integer>\",\n      \"quantity\": \"<integer>\",\n      \"retail_price\": \"<string>\",\n      \"name\": \"<string>\",\n      \"placements\": [\n        \"<object>\",\n        \"<object>\"\n      ]\n    }\n  ],\n  \"costs\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.printful.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "29931420-9049-4f14-8c8f-ac20b7314923",
+    "name": "Printful Catalog Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.\n\nContact Support:\n Name: Printful Developers",
+      "type": "text/plain"
+    }
+  }
+}
