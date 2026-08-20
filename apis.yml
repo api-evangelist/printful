@@ -24,6 +24,12 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/printful.p
 tags:
 - Print on Demand
 - Fulfillment
+- E-Commerce
+- Dropshipping
+- Merchandise
+tags_raw:
+- Print on Demand
+- Fulfillment
 - Ecommerce
 - Dropshipping
 - Merchandise
@@ -57,6 +63,8 @@ apis:
   humanURL: https://developers.printful.com/docs/v2-beta/
   baseURL: https://api.printful.com/v2
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -97,6 +105,8 @@ apis:
   humanURL: https://developers.printful.com/docs/v2-beta/
   baseURL: https://api.printful.com/v2
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -117,6 +127,8 @@ apis:
   humanURL: https://developers.printful.com/docs/v2-beta/
   baseURL: https://api.printful.com/v2
   tags:
+  - shipping-rates
+  tags_raw:
   - Shipping Rates
   properties:
   - type: OpenAPI
@@ -177,6 +189,8 @@ apis:
   humanURL: https://developers.printful.com/docs/v2-beta/
   baseURL: https://api.printful.com/v2
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
