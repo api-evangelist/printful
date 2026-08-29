@@ -7,6 +7,18 @@ description: Printful is a print-on-demand and order-fulfillment platform that l
   Printful API (v2 and v1) exposes the product catalog, store products, order management,
   file library, mockup generator, shipping rates, warehouse products, and webhooks
   over a REST interface authenticated with OAuth 2.0 / Bearer tokens.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
