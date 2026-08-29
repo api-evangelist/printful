@@ -1,0 +1,25 @@
+slug: printful
+provider: Printful
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Orders
+  spec_file: printful-orders-api-openapi.yml
+  capability_id: BC-520.40
+  capability_id_l1: BC-520
+  capability_name: Order Fulfilment Management
+  confidence: 0.78
+  evidence: POST /v2/orders/{id}/confirm confirmOrder — 'Confirm a draft order for fulfillment.'; schemas
+    Order, OrderItem, Recipient
+  reason: Operations create, amend, confirm and itemise customer orders destined for production/fulfilment,
+    which is order promising and fulfilment orchestration rather than sales pipeline or billing.

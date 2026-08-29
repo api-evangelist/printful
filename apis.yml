@@ -218,6 +218,9 @@ apis:
   - type: Documentation
     url: https://developers.printful.com/docs/
 common:
+- type: CapabilityMap
+  url: capabilities/printful-capability-edges.yml
+  name: Printful Business Capability Map
 - type: AgenticAccess
   url: agentic-access/printful-agentic-access.yml
 - type: VulnerabilityDisclosure
