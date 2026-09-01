@@ -139,7 +139,7 @@ apis:
   humanURL: https://developers.printful.com/docs/v2-beta/
   baseURL: https://api.printful.com/v2
   tags:
-  - Shipping Rates
+  - shipping-rates
   tags_raw:
   - Shipping Rates
   properties:
