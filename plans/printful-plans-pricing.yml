@@ -1,136 +1,39 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Printful
-providerId: printful
-created: '2026-06-25'
-modified: '2026-06-25'
-reconciled: true
-tags:
-- Print on Demand
-- Fulfillment
-- Ecommerce
-- Dropshipping
-- Merchandise
-- Plans
-description: >-
-  Printful does not charge a fee to use its API. There are no upfront or
-  monthly costs to create products or connect a store; merchants pay only the
-  per-product fulfillment cost (blank product plus one standard print
-  placement) plus shipping when a customer places an order. Optional add-ons
-  (extra print placements, inside labels, embroidery digitization) carry
-  additional per-item fees. An optional Printful Growth membership ($24.99/mo,
-  14-day free trial, free for a year once yearly sales reach $12,000) provides
-  product discounts of up to 33% and other perks.
-notes: >-
-  Per-product fulfillment costs vary by garment brand, product type, and
-  printing technique and change over time. Verify current product base prices,
-  shipping rates, and membership terms on the Printful pricing and plans pages
-  during reconciliation. A targeted base-price increase took effect 2026-02-26.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.printful.com/pricing
 sources:
 - https://www.printful.com/pricing
-- https://www.printful.com/plans
-- https://help.printful.com/hc/en-us/articles/10720462952988-What-should-I-know-about-the-Printful-Growth-plan
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T124425
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+note: 'Subscription tiers plus per-item add-on fees: printed inside labels $0.99 per label, outside labels
+  $2.49 per label, Premium Images $1 per image, embroidery digitization $2.95-$6.50 per design, extra
+  embroidery placement $2.95.'
+plan_count: 3
+currency: USD
 plans:
-- id: printful-free
-  name: Free
-  type: free
-  description: >-
-    Free to use with no monthly subscription and no API usage fee. Includes
-    full catalog access, store integrations, the API, and automatic
-    fulfillment. Merchants pay only fulfillment and shipping per order.
-  entries:
-  - label: API Access
-    name: api_access
-    type: free
-    metric: requests
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: $0 (no API fee)
-    userMultiplied: false
-  - label: Product Fulfillment
-    name: fulfillment
-    type: usage
-    metric: products
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: per-product base cost (blank + one standard print placement); varies by product
-    userMultiplied: false
-  - label: Shipping
-    name: shipping
-    type: usage
-    metric: orders
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: flat-rate by product category and destination
-    userMultiplied: false
-  - label: Extra Print Placement
-    name: extra_placement
-    type: usage
-    metric: placements
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: ~$2.49-$5.25 per additional placement
-    userMultiplied: false
-  - label: Inside Label
-    name: inside_label
-    type: usage
-    metric: items
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: ~$0.99 per item
-    userMultiplied: false
-  - label: Embroidery Digitization
-    name: embroidery_digitization
-    type: usage
-    metric: designs
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: ~$2.95-$6.50 per design
-    userMultiplied: false
-  elements:
-  - name: Catalog
-  - name: Store Products
-  - name: Orders
-  - name: Files
-  - name: Mockup Generator
-  - name: Shipping Rates
-  - name: Warehouse
-  - name: Webhooks
-- id: printful-growth
-  name: Printful Growth
-  type: subscription
-  description: >-
-    Optional paid membership giving up to 33% off product pricing plus
-    discounted branding and exclusive deals. Becomes free for a year once
-    yearly sales reach $12,000.
-  entries:
-  - label: Growth Membership
-    name: growth
-    type: flat
-    metric: subscription
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: $24.99/month (14-day free trial; free for a year after $12,000 in yearly sales)
-    userMultiplied: false
-  elements:
-  - name: Up to 33% Product Discounts
-  - name: Discounted Branding
-  - name: Exclusive Deals
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+- name: Free
+  price_text: $0 /month
+  price: 0
+  currency: USD
+  period: month
+  included_quota: Access to 561 custom products, Unlimited stores and 10 Quick Stores, Free Design Maker
+    and Mockup Generator, 24/7 customer support
+- name: Printful Growth
+  price_text: $24.99 /month
+  price: 24.99
+  currency: USD
+  period: month
+  included_quota: Up to 33% off product pricing, 9% off product branding, 25% off sample orders; Free
+    when you reach $12K/year in sales
+- name: Enterprise
+  price_text: Custom pricing
+  period: none
+  included_quota: Everything in Printful Growth, plus dedicated Success Manager and custom solutions
+rate_limit_statements:
+- You can place 1 sample order per month with up to 3 items per order

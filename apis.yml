@@ -218,6 +218,8 @@ apis:
   - type: Documentation
     url: https://developers.printful.com/docs/
 common:
+- type: Pricing
+  url: https://www.printful.com/pricing
 - type: CapabilityMap
   url: capabilities/printful-capability-edges.yml
   name: Printful Business Capability Map
