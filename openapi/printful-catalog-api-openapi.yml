@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Printful Catalog API
   description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
@@ -21,7 +21,7 @@ paths:
       operationId: getCatalogProducts
       tags:
       - Catalog
-      summary: Retrieve a list of products available in Printful's catalog.
+      summary: Retrieve a list of products available in Printful's catalog
       parameters:
       - $ref: '#/components/parameters/Limit'
       - $ref: '#/components/parameters/Offset'
@@ -39,7 +39,7 @@ paths:
       operationId: getCatalogProduct
       tags:
       - Catalog
-      summary: Retrieve information about a single catalog product.
+      summary: Retrieve information about a single catalog product
       parameters:
       - $ref: '#/components/parameters/PathId'
       responses:
@@ -56,7 +56,7 @@ paths:
       operationId: getCatalogProductVariants
       tags:
       - Catalog
-      summary: Retrieve all variants of a catalog product.
+      summary: Retrieve all variants of a catalog product
       parameters:
       - $ref: '#/components/parameters/PathId'
       responses:
@@ -71,7 +71,7 @@ paths:
       operationId: getCatalogVariant
       tags:
       - Catalog
-      summary: Retrieve information about a single catalog variant.
+      summary: Retrieve information about a single catalog variant
       parameters:
       - $ref: '#/components/parameters/PathId'
       responses:
@@ -86,7 +86,7 @@ paths:
       operationId: getCatalogProductPrices
       tags:
       - Catalog
-      summary: Retrieve product and variant prices for a catalog product.
+      summary: Retrieve product and variant prices for a catalog product
       parameters:
       - $ref: '#/components/parameters/PathId'
       responses:
@@ -101,7 +101,7 @@ paths:
       operationId: getCatalogProductAvailability
       tags:
       - Catalog
-      summary: Retrieve stock availability for a catalog product.
+      summary: Retrieve stock availability for a catalog product
       parameters:
       - $ref: '#/components/parameters/PathId'
       responses:
@@ -116,7 +116,7 @@ paths:
       operationId: getCatalogCategories
       tags:
       - Catalog
-      summary: Retrieve the list of catalog categories.
+      summary: Retrieve the list of catalog categories
       responses:
         '200':
           description: A list of catalog categories.
@@ -129,7 +129,7 @@ paths:
       operationId: getCatalogProductMockupStyles
       tags:
       - Catalog
-      summary: Retrieve available mockup styles for a catalog product.
+      summary: Retrieve available mockup styles for a catalog product
       parameters:
       - $ref: '#/components/parameters/PathId'
       responses:
@@ -144,7 +144,7 @@ paths:
       operationId: getCatalogProductMockupTemplates
       tags:
       - Catalog
-      summary: Retrieve mockup templates for a catalog product.
+      summary: Retrieve mockup templates for a catalog product
       parameters:
       - $ref: '#/components/parameters/PathId'
       responses:
@@ -155,7 +155,49 @@ paths:
               schema:
                 type: object
 components:
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Result set offset for pagination.
+      schema:
+        type: integer
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return per page.
+      schema:
+        type: integer
+        default: 20
   schemas:
+    Paging:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+    CatalogProductList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogProduct'
+        paging:
+          $ref: '#/components/schemas/Paging'
     Problem:
       type: object
       description: RFC 9457 Problem Details for HTTP APIs.
@@ -185,33 +227,6 @@ components:
           type: string
         image:
           type: string
-    CatalogVariantList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogVariant'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    CatalogProductList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogProduct'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    Paging:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
     CatalogProduct:
       type: object
       properties:
@@ -224,8 +239,9 @@ components:
         name:
           type: string
         brand:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         model:
           type: string
         image:
@@ -236,30 +252,15 @@ components:
           type: boolean
         description:
           type: string
-  parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The resource identifier.
-      schema:
-        type: integer
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of items to return per page.
-      schema:
-        type: integer
-        default: 20
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Result set offset for pagination.
-      schema:
-        type: integer
-        default: 0
+    CatalogVariantList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogVariant'
+        paging:
+          $ref: '#/components/schemas/Paging'
   responses:
     NotFound:
       description: The requested resource was not found (RFC 9457 problem details).

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Printful Catalog Warehouse API
+  title: Printful Warehouse API
   description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
   termsOfService: https://www.printful.com/policies/terms-of-service
   contact:
@@ -21,7 +21,7 @@ paths:
       operationId: getWarehouseProducts
       tags:
       - Warehouse
-      summary: Retrieve a list of warehouse products.
+      summary: Retrieve a list of warehouse products
       parameters:
       - $ref: '#/components/parameters/StoreIdHeader'
       - $ref: '#/components/parameters/Limit'
@@ -38,7 +38,7 @@ paths:
       operationId: getWarehouseProduct
       tags:
       - Warehouse
-      summary: Retrieve a single warehouse product.
+      summary: Retrieve a single warehouse product
       parameters:
       - $ref: '#/components/parameters/PathId'
       - $ref: '#/components/parameters/StoreIdHeader'
@@ -51,13 +51,6 @@ paths:
                 type: object
 components:
   parameters:
-    StoreIdHeader:
-      name: X-PF-Store-Id
-      in: header
-      required: false
-      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
-      schema:
-        type: integer
     Offset:
       name: offset
       in: query
@@ -66,11 +59,11 @@ components:
       schema:
         type: integer
         default: 0
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The resource identifier.
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
       schema:
         type: integer
     Limit:
@@ -81,6 +74,13 @@ components:
       schema:
         type: integer
         default: 20
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
   securitySchemes:
     BearerAuth:
       type: http

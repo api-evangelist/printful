@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Printful Catalog Shipping Rates API
+  title: Printful Shipping Rates API
   description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
   termsOfService: https://www.printful.com/policies/terms-of-service
   contact:
@@ -21,7 +21,7 @@ paths:
       operationId: calculateShippingRates
       tags:
       - Shipping Rates
-      summary: Calculate available shipping rates for items and a destination.
+      summary: Calculate available shipping rates for items and a destination
       parameters:
       - $ref: '#/components/parameters/StoreIdHeader'
       requestBody:
@@ -39,31 +39,17 @@ paths:
                 type: object
 components:
   schemas:
-    Recipient:
+    ShippingRateRequest:
       type: object
       properties:
-        name:
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        currency:
           type: string
-        address1:
-          type: string
-        address2:
-          type: string
-          nullable: true
-        city:
-          type: string
-        state_code:
-          type: string
-          nullable: true
-        country_code:
-          type: string
-        zip:
-          type: string
-        phone:
-          type: string
-          nullable: true
-        email:
-          type: string
-          nullable: true
     OrderItem:
       type: object
       properties:
@@ -83,17 +69,35 @@ components:
           type: array
           items:
             type: object
-    ShippingRateRequest:
+    Recipient:
       type: object
       properties:
-        recipient:
-          $ref: '#/components/schemas/Recipient'
-        order_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItem'
-        currency:
+        name:
           type: string
+        address1:
+          type: string
+        address2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        state_code:
+          type:
+          - string
+          - 'null'
+        country_code:
+          type: string
+        zip:
+          type: string
+        phone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
   parameters:
     StoreIdHeader:
       name: X-PF-Store-Id

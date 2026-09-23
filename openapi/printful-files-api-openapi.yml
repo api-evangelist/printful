@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Printful Catalog Files API
+  title: Printful Files API
   description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
   termsOfService: https://www.printful.com/policies/terms-of-service
   contact:
@@ -21,7 +21,7 @@ paths:
       operationId: createFile
       tags:
       - Files
-      summary: Add a print file to the file library.
+      summary: Add a print file to the file library
       parameters:
       - $ref: '#/components/parameters/StoreIdHeader'
       requestBody:
@@ -42,7 +42,7 @@ paths:
       operationId: getFile
       tags:
       - Files
-      summary: Retrieve information about a file in the library.
+      summary: Retrieve information about a file in the library
       parameters:
       - $ref: '#/components/parameters/PathId'
       - $ref: '#/components/parameters/StoreIdHeader'

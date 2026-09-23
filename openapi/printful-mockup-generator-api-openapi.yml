@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Printful Catalog Mockup Generator API
+  title: Printful Mockup Generator API
   description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
   termsOfService: https://www.printful.com/policies/terms-of-service
   contact:
@@ -21,7 +21,7 @@ paths:
       operationId: getMockupTasks
       tags:
       - Mockup Generator
-      summary: Retrieve the status and results of mockup generation tasks.
+      summary: Retrieve the status and results of mockup generation tasks
       parameters:
       - $ref: '#/components/parameters/StoreIdHeader'
       responses:
@@ -35,7 +35,7 @@ paths:
       operationId: createMockupTask
       tags:
       - Mockup Generator
-      summary: Create a mockup generator task.
+      summary: Create a mockup generator task
       parameters:
       - $ref: '#/components/parameters/StoreIdHeader'
       requestBody:

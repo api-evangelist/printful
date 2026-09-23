@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Printful Catalog Orders API
+  title: Printful Orders API
   description: Specification of the Printful print-on-demand and order-fulfillment API. The v2 API (Open Beta) is served under the /v2 prefix at https://api.printful.com and covers the product catalog, orders, files, the mockup generator, shipping rates, warehouse products, and webhooks. Authentication uses OAuth 2.0 access tokens or private tokens passed as a Bearer token in the Authorization header; account-level tokens additionally pass the target store via the X-PF-Store-Id header.
   termsOfService: https://www.printful.com/policies/terms-of-service
   contact:
@@ -21,7 +21,7 @@ paths:
       operationId: getOrders
       tags:
       - Orders
-      summary: Retrieve a list of orders.
+      summary: Retrieve a list of orders
       parameters:
       - $ref: '#/components/parameters/StoreIdHeader'
       - $ref: '#/components/parameters/Limit'
@@ -37,7 +37,7 @@ paths:
       operationId: createOrder
       tags:
       - Orders
-      summary: Create a new order with itemized order building.
+      summary: Create a new order with itemized order building
       parameters:
       - $ref: '#/components/parameters/StoreIdHeader'
       requestBody:
@@ -58,7 +58,7 @@ paths:
       operationId: getOrder
       tags:
       - Orders
-      summary: Retrieve a single order.
+      summary: Retrieve a single order
       parameters:
       - $ref: '#/components/parameters/PathId'
       - $ref: '#/components/parameters/StoreIdHeader'
@@ -73,7 +73,7 @@ paths:
       operationId: updateOrder
       tags:
       - Orders
-      summary: Update a draft or failed order.
+      summary: Update a draft or failed order
       parameters:
       - $ref: '#/components/parameters/PathId'
       - $ref: '#/components/parameters/StoreIdHeader'
@@ -94,7 +94,7 @@ paths:
       operationId: deleteOrder
       tags:
       - Orders
-      summary: Delete a draft order.
+      summary: Delete a draft order
       parameters:
       - $ref: '#/components/parameters/PathId'
       - $ref: '#/components/parameters/StoreIdHeader'
@@ -106,7 +106,7 @@ paths:
       operationId: confirmOrder
       tags:
       - Orders
-      summary: Confirm a draft order for fulfillment.
+      summary: Confirm a draft order for fulfillment
       parameters:
       - $ref: '#/components/parameters/PathId'
       - $ref: '#/components/parameters/StoreIdHeader'
@@ -122,7 +122,7 @@ paths:
       operationId: getOrderItems
       tags:
       - Orders
-      summary: Retrieve the items of an order.
+      summary: Retrieve the items of an order
       parameters:
       - $ref: '#/components/parameters/PathId'
       - $ref: '#/components/parameters/StoreIdHeader'
@@ -138,7 +138,7 @@ paths:
       operationId: createOrderEstimationTask
       tags:
       - Orders
-      summary: Create an order cost estimation task.
+      summary: Create an order cost estimation task
       parameters:
       - $ref: '#/components/parameters/StoreIdHeader'
       requestBody:
@@ -155,49 +155,47 @@ paths:
               schema:
                 type: object
 components:
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Result set offset for pagination.
+      schema:
+        type: integer
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return per page.
+      schema:
+        type: integer
+        default: 20
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
   schemas:
-    Recipient:
-      type: object
-      properties:
-        name:
-          type: string
-        address1:
-          type: string
-        address2:
-          type: string
-          nullable: true
-        city:
-          type: string
-        state_code:
-          type: string
-          nullable: true
-        country_code:
-          type: string
-        zip:
-          type: string
-        phone:
-          type: string
-          nullable: true
-        email:
-          type: string
-          nullable: true
-    OrderList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Order'
-        paging:
-          $ref: '#/components/schemas/Paging'
     Order:
       type: object
       properties:
         id:
           type: integer
         external_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         store_id:
           type: integer
         status:
@@ -213,6 +211,53 @@ components:
             $ref: '#/components/schemas/OrderItem'
         costs:
           type: object
+    Paging:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+    Recipient:
+      type: object
+      properties:
+        name:
+          type: string
+        address1:
+          type: string
+        address2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        state_code:
+          type:
+          - string
+          - 'null'
+        country_code:
+          type: string
+        zip:
+          type: string
+        phone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+    OrderList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+        paging:
+          $ref: '#/components/schemas/Paging'
     OrderItem:
       type: object
       properties:
@@ -232,46 +277,6 @@ components:
           type: array
           items:
             type: object
-    Paging:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-  parameters:
-    StoreIdHeader:
-      name: X-PF-Store-Id
-      in: header
-      required: false
-      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
-      schema:
-        type: integer
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The resource identifier.
-      schema:
-        type: integer
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of items to return per page.
-      schema:
-        type: integer
-        default: 20
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Result set offset for pagination.
-      schema:
-        type: integer
-        default: 0
   securitySchemes:
     BearerAuth:
       type: http
