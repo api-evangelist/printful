@@ -156,6 +156,14 @@ paths:
                 type: object
 components:
   parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return per page.
+      schema:
+        type: integer
+        default: 20
     PathId:
       name: id
       in: path
@@ -171,24 +179,7 @@ components:
       schema:
         type: integer
         default: 0
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of items to return per page.
-      schema:
-        type: integer
-        default: 20
   schemas:
-    Paging:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
     CatalogProductList:
       type: object
       properties:
@@ -227,6 +218,15 @@ components:
           type: string
         image:
           type: string
+    Paging:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
     CatalogProduct:
       type: object
       properties:

@@ -39,36 +39,6 @@ paths:
                 type: object
 components:
   schemas:
-    ShippingRateRequest:
-      type: object
-      properties:
-        recipient:
-          $ref: '#/components/schemas/Recipient'
-        order_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItem'
-        currency:
-          type: string
-    OrderItem:
-      type: object
-      properties:
-        id:
-          type: integer
-        source:
-          type: string
-        catalog_variant_id:
-          type: integer
-        quantity:
-          type: integer
-        retail_price:
-          type: string
-        name:
-          type: string
-        placements:
-          type: array
-          items:
-            type: object
     Recipient:
       type: object
       properties:
@@ -98,6 +68,36 @@ components:
           type:
           - string
           - 'null'
+    OrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        source:
+          type: string
+        catalog_variant_id:
+          type: integer
+        quantity:
+          type: integer
+        retail_price:
+          type: string
+        name:
+          type: string
+        placements:
+          type: array
+          items:
+            type: object
+    ShippingRateRequest:
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        currency:
+          type: string
   parameters:
     StoreIdHeader:
       name: X-PF-Store-Id

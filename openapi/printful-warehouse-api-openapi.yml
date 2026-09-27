@@ -51,14 +51,13 @@ paths:
                 type: object
 components:
   parameters:
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Result set offset for pagination.
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
       schema:
         type: integer
-        default: 0
     StoreIdHeader:
       name: X-PF-Store-Id
       in: header
@@ -74,13 +73,14 @@ components:
       schema:
         type: integer
         default: 20
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The resource identifier.
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Result set offset for pagination.
       schema:
         type: integer
+        default: 0
   securitySchemes:
     BearerAuth:
       type: http
