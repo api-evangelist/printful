@@ -39,35 +39,6 @@ paths:
                 type: object
 components:
   schemas:
-    Recipient:
-      type: object
-      properties:
-        name:
-          type: string
-        address1:
-          type: string
-        address2:
-          type:
-          - string
-          - 'null'
-        city:
-          type: string
-        state_code:
-          type:
-          - string
-          - 'null'
-        country_code:
-          type: string
-        zip:
-          type: string
-        phone:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
     OrderItem:
       type: object
       properties:
@@ -98,6 +69,35 @@ components:
             $ref: '#/components/schemas/OrderItem'
         currency:
           type: string
+    Recipient:
+      type: object
+      properties:
+        name:
+          type: string
+        address1:
+          type: string
+        address2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        state_code:
+          type:
+          - string
+          - 'null'
+        country_code:
+          type: string
+        zip:
+          type: string
+        phone:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
   parameters:
     StoreIdHeader:
       name: X-PF-Store-Id

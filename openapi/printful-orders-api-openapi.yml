@@ -156,15 +156,34 @@ paths:
                 type: object
 components:
   schemas:
-    OrderList:
+    Paging:
       type: object
       properties:
-        data:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+    OrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        source:
+          type: string
+        catalog_variant_id:
+          type: integer
+        quantity:
+          type: integer
+        retail_price:
+          type: string
+        name:
+          type: string
+        placements:
           type: array
           items:
-            $ref: '#/components/schemas/Order'
-        paging:
-          $ref: '#/components/schemas/Paging'
+            type: object
     Order:
       type: object
       properties:
@@ -218,34 +237,15 @@ components:
           type:
           - string
           - 'null'
-    Paging:
+    OrderList:
       type: object
       properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-    OrderItem:
-      type: object
-      properties:
-        id:
-          type: integer
-        source:
-          type: string
-        catalog_variant_id:
-          type: integer
-        quantity:
-          type: integer
-        retail_price:
-          type: string
-        name:
-          type: string
-        placements:
+        data:
           type: array
           items:
-            type: object
+            $ref: '#/components/schemas/Order'
+        paging:
+          $ref: '#/components/schemas/Paging'
   parameters:
     Limit:
       name: limit
@@ -255,13 +255,6 @@ components:
       schema:
         type: integer
         default: 20
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The resource identifier.
-      schema:
-        type: integer
     StoreIdHeader:
       name: X-PF-Store-Id
       in: header
@@ -277,6 +270,13 @@ components:
       schema:
         type: integer
         default: 0
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
   securitySchemes:
     BearerAuth:
       type: http

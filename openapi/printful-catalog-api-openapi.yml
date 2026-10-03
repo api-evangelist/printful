@@ -155,52 +155,16 @@ paths:
               schema:
                 type: object
 components:
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of items to return per page.
-      schema:
-        type: integer
-        default: 20
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The resource identifier.
-      schema:
-        type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Result set offset for pagination.
-      schema:
-        type: integer
-        default: 0
   schemas:
-    CatalogProductList:
+    Paging:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogProduct'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    Problem:
-      type: object
-      description: RFC 9457 Problem Details for HTTP APIs.
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        status:
+        total:
           type: integer
-        detail:
-          type: string
+        offset:
+          type: integer
+        limit:
+          type: integer
     CatalogVariant:
       type: object
       properties:
@@ -218,15 +182,6 @@ components:
           type: string
         image:
           type: string
-    Paging:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
     CatalogProduct:
       type: object
       properties:
@@ -252,6 +207,18 @@ components:
           type: boolean
         description:
           type: string
+    Problem:
+      type: object
+      description: RFC 9457 Problem Details for HTTP APIs.
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
     CatalogVariantList:
       type: object
       properties:
@@ -259,6 +226,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CatalogVariant'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    CatalogProductList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogProduct'
         paging:
           $ref: '#/components/schemas/Paging'
   responses:
@@ -274,6 +250,30 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return per page.
+      schema:
+        type: integer
+        default: 20
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Result set offset for pagination.
+      schema:
+        type: integer
+        default: 0
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
   securitySchemes:
     BearerAuth:
       type: http

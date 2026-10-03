@@ -55,18 +55,18 @@ paths:
                 $ref: '#/components/schemas/File'
 components:
   parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The resource identifier.
-      schema:
-        type: integer
     StoreIdHeader:
       name: X-PF-Store-Id
       in: header
       required: false
       description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
       schema:
         type: integer
   schemas:
