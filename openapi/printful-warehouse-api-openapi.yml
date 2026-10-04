@@ -51,26 +51,18 @@ paths:
                 type: object
 components:
   parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The resource identifier.
-      schema:
-        type: integer
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of items to return per page.
-      schema:
-        type: integer
-        default: 20
     StoreIdHeader:
       name: X-PF-Store-Id
       in: header
       required: false
       description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
       schema:
         type: integer
     Offset:
@@ -81,6 +73,14 @@ components:
       schema:
         type: integer
         default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return per page.
+      schema:
+        type: integer
+        default: 20
   securitySchemes:
     BearerAuth:
       type: http

@@ -97,6 +97,14 @@ paths:
               schema:
                 type: object
 components:
+  parameters:
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
   schemas:
     Webhook:
       type: object
@@ -114,14 +122,6 @@ components:
               url:
                 type: string
                 format: uri
-  parameters:
-    StoreIdHeader:
-      name: X-PF-Store-Id
-      in: header
-      required: false
-      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
-      schema:
-        type: integer
   securitySchemes:
     BearerAuth:
       type: http

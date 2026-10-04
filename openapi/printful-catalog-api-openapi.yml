@@ -155,33 +155,40 @@ paths:
               schema:
                 type: object
 components:
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return per page.
+      schema:
+        type: integer
+        default: 20
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Result set offset for pagination.
+      schema:
+        type: integer
+        default: 0
   schemas:
-    Paging:
+    CatalogVariantList:
       type: object
       properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-    CatalogVariant:
-      type: object
-      properties:
-        id:
-          type: integer
-        catalog_product_id:
-          type: integer
-        name:
-          type: string
-        size:
-          type: string
-        color:
-          type: string
-        color_code:
-          type: string
-        image:
-          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogVariant'
+        paging:
+          $ref: '#/components/schemas/Paging'
     CatalogProduct:
       type: object
       properties:
@@ -207,6 +214,24 @@ components:
           type: boolean
         description:
           type: string
+    CatalogProductList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogProduct'
+        paging:
+          $ref: '#/components/schemas/Paging'
+    Paging:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
     Problem:
       type: object
       description: RFC 9457 Problem Details for HTTP APIs.
@@ -219,61 +244,36 @@ components:
           type: integer
         detail:
           type: string
-    CatalogVariantList:
+    CatalogVariant:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogVariant'
-        paging:
-          $ref: '#/components/schemas/Paging'
-    CatalogProductList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogProduct'
-        paging:
-          $ref: '#/components/schemas/Paging'
+        id:
+          type: integer
+        catalog_product_id:
+          type: integer
+        name:
+          type: string
+        size:
+          type: string
+        color:
+          type: string
+        color_code:
+          type: string
+        image:
+          type: string
   responses:
-    NotFound:
-      description: The requested resource was not found (RFC 9457 problem details).
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Problem'
     TooManyRequests:
       description: Rate limit exceeded (120 requests per 60 seconds).
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of items to return per page.
-      schema:
-        type: integer
-        default: 20
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Result set offset for pagination.
-      schema:
-        type: integer
-        default: 0
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The resource identifier.
-      schema:
-        type: integer
+    NotFound:
+      description: The requested resource was not found (RFC 9457 problem details).
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
   securitySchemes:
     BearerAuth:
       type: http

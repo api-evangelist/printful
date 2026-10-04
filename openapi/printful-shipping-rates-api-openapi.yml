@@ -58,17 +58,6 @@ components:
           type: array
           items:
             type: object
-    ShippingRateRequest:
-      type: object
-      properties:
-        recipient:
-          $ref: '#/components/schemas/Recipient'
-        order_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItem'
-        currency:
-          type: string
     Recipient:
       type: object
       properties:
@@ -98,6 +87,17 @@ components:
           type:
           - string
           - 'null'
+    ShippingRateRequest:
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        order_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        currency:
+          type: string
   parameters:
     StoreIdHeader:
       name: X-PF-Store-Id
