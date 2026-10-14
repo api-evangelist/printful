@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/printful/integrations
 - https://n8n.io/integrations/printful/
@@ -10,7 +10,25 @@ checked:
 - https://monid.ai/tools/printful
 - https://n8n.io/integrations/printful/
 - https://zapier.com/apps/printful/integrations
+- square/integrations/square-integration-edges.yml
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: Square (own)
+  partner: square
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://squareup.com/us/en/app-marketplace/app/printful-us
+  mirror_of: square/integrations/square-integration-edges.yml
+  apps:
+  - Printful
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Square Online add-ons
 templates: []
