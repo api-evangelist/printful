@@ -11,6 +11,7 @@ checked:
 - https://n8n.io/integrations/printful/
 - https://zapier.com/apps/printful/integrations
 - square/integrations/square-integration-edges.yml
+- woocommerce/integrations/woocommerce-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -31,4 +32,21 @@ edges:
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
   category: Square Online add-ons
+- partner_name: WooCommerce (own)
+  partner: woocommerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://woocommerce.com/products/printful/
+  mirror_of: woocommerce/integrations/woocommerce-integration-edges.yml
+  apps:
+  - 'Printful: Print on Demand'
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: extension
 templates: []
