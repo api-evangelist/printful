@@ -155,57 +155,31 @@ paths:
               schema:
                 type: object
 components:
-  parameters:
-    PathId:
-      name: id
-      in: path
-      required: true
-      description: The resource identifier.
-      schema:
-        type: integer
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Result set offset for pagination.
-      schema:
-        type: integer
-        default: 0
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Number of items to return per page.
-      schema:
-        type: integer
-        default: 20
-    StoreIdHeader:
-      name: X-PF-Store-Id
-      in: header
-      required: false
-      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
-      schema:
-        type: integer
   schemas:
-    OrderItem:
+    Order:
       type: object
       properties:
         id:
           type: integer
-        source:
-          type: string
-        catalog_variant_id:
+        external_id:
+          type:
+          - string
+          - 'null'
+        store_id:
           type: integer
-        quantity:
-          type: integer
-        retail_price:
+        status:
           type: string
-        name:
+          description: Order status (e.g. draft, pending, failed, canceled, fulfilled).
+        shipping:
           type: string
-        placements:
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        order_items:
           type: array
           items:
-            type: object
+            $ref: '#/components/schemas/OrderItem'
+        costs:
+          type: object
     Recipient:
       type: object
       properties:
@@ -253,30 +227,56 @@ components:
             $ref: '#/components/schemas/Order'
         paging:
           $ref: '#/components/schemas/Paging'
-    Order:
+    OrderItem:
       type: object
       properties:
         id:
           type: integer
-        external_id:
-          type:
-          - string
-          - 'null'
-        store_id:
+        source:
+          type: string
+        catalog_variant_id:
           type: integer
-        status:
+        quantity:
+          type: integer
+        retail_price:
           type: string
-          description: Order status (e.g. draft, pending, failed, canceled, fulfilled).
-        shipping:
+        name:
           type: string
-        recipient:
-          $ref: '#/components/schemas/Recipient'
-        order_items:
+        placements:
           type: array
           items:
-            $ref: '#/components/schemas/OrderItem'
-        costs:
-          type: object
+            type: object
+  parameters:
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      description: The resource identifier.
+      schema:
+        type: integer
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Number of items to return per page.
+      schema:
+        type: integer
+        default: 20
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Result set offset for pagination.
+      schema:
+        type: integer
+        default: 0
   securitySchemes:
     BearerAuth:
       type: http

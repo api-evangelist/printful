@@ -38,26 +38,26 @@ paths:
               schema:
                 type: object
 components:
+  parameters:
+    StoreIdHeader:
+      name: X-PF-Store-Id
+      in: header
+      required: false
+      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
+      schema:
+        type: integer
   schemas:
-    OrderItem:
+    ShippingRateRequest:
       type: object
       properties:
-        id:
-          type: integer
-        source:
-          type: string
-        catalog_variant_id:
-          type: integer
-        quantity:
-          type: integer
-        retail_price:
-          type: string
-        name:
-          type: string
-        placements:
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        order_items:
           type: array
           items:
-            type: object
+            $ref: '#/components/schemas/OrderItem'
+        currency:
+          type: string
     Recipient:
       type: object
       properties:
@@ -87,25 +87,25 @@ components:
           type:
           - string
           - 'null'
-    ShippingRateRequest:
+    OrderItem:
       type: object
       properties:
-        recipient:
-          $ref: '#/components/schemas/Recipient'
-        order_items:
+        id:
+          type: integer
+        source:
+          type: string
+        catalog_variant_id:
+          type: integer
+        quantity:
+          type: integer
+        retail_price:
+          type: string
+        name:
+          type: string
+        placements:
           type: array
           items:
-            $ref: '#/components/schemas/OrderItem'
-        currency:
-          type: string
-  parameters:
-    StoreIdHeader:
-      name: X-PF-Store-Id
-      in: header
-      required: false
-      description: Target store id. Required when using an account-level OAuth token to scope the request to a specific store.
-      schema:
-        type: integer
+            type: object
   securitySchemes:
     BearerAuth:
       type: http
