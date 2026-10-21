@@ -14,9 +14,42 @@ checked:
 - https://zapier.com/apps/printful/integrations
 - square/integrations/square-integration-edges.yml
 - woocommerce/integrations/woocommerce-integration-edges.yml
+- adobe-commerce/integrations/adobe-commerce-integration-edges.yml
+- ebay/integrations/ebay-integration-edges.yml
+- etsy/integrations/etsy-integration-edges.yml
+- nuvemshop-tiendanube/integrations/nuvemshop-tiendanube-integration-edges.yml
+- shipstation/integrations/shipstation-integration-edges.yml
+- squarespace/integrations/squarespace-integration-edges.yml
+- weebly/integrations/weebly-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
+- partner_name: Pipedream
+  partner: pipedream
+  partner_match: aggregator
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/printful
+  category: null
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: printful
+    matched_domain: printful.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: printful
+    actions: true
+    sources: true
+    builder: Pipedream repo (component)
+  detected_by: sweep-workflow-automation.py
+  first_seen: '2026-10-15'
 - partner_name: Square (own)
   partner: square
   partner_match: mirror
@@ -51,30 +84,123 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: extension
-- partner_name: Pipedream
-  partner: pipedream
-  partner_match: aggregator
+- partner_name: Adobe Commerce (builder-directory)
+  partner: adobe-commerce
+  partner_match: mirror
+  mirror_match: domain
   type: marketplace
-  marketplace: pipedream-components
-  channel: open-source-node
-  relationship: ipaas-bridge
+  relationship: platform-app
   direction: third-party
-  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/printful
-  category: null
-  contract_reference:
-    register: Pipedream components (PipedreamHQ/pipedream components/)
-    spec_file: null
-    role: ipaas-connector:pipedream
-    registered_name: printful
-    matched_domain: printful.com
-    matched_by: domain
-    detected_by: sweep-workflow-automation.py
-    detected: '2026-10-15'
-    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
-    app_slug: printful
-    actions: true
-    sources: true
-    builder: Pipedream repo (component)
-  detected_by: sweep-workflow-automation.py
-  first_seen: '2026-10-15'
+  channel: partner-built
+  marketplace: builder-directory
+  evidence: https://www.printful.com/integrations/adobecommerce
+  mirror_of: adobe-commerce/integrations/adobe-commerce-integration-edges.yml
+  apps:
+  - Printful for Adobe Commerce
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: print-on-demand fulfilment integration
+- partner_name: eBay (builder-directory)
+  partner: ebay
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: builder-directory
+  evidence: https://www.printful.com/integrations/ebay
+  mirror_of: ebay/integrations/ebay-integration-edges.yml
+  apps:
+  - Printful for Ebay
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: print-on-demand fulfilment integration
+- partner_name: Etsy (builder-directory)
+  partner: etsy
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: builder-directory
+  evidence: https://www.printful.com/integrations/etsy
+  mirror_of: etsy/integrations/etsy-integration-edges.yml
+  apps:
+  - Printful for Etsy
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: print-on-demand fulfilment integration
+- partner_name: Nuvemshop Tiendanube (builder-directory)
+  partner: nuvemshop-tiendanube
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: builder-directory
+  evidence: https://www.printful.com/integrations/nuvemshop
+  mirror_of: nuvemshop-tiendanube/integrations/nuvemshop-tiendanube-integration-edges.yml
+  apps:
+  - Printful for Nuvemshop
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: print-on-demand fulfilment integration
+- partner_name: ShipStation (builder-directory)
+  partner: shipstation
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: builder-directory
+  evidence: https://www.printful.com/integrations/shipstation
+  mirror_of: shipstation/integrations/shipstation-integration-edges.yml
+  apps:
+  - Printful for Shipstation
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: print-on-demand fulfilment integration
+- partner_name: Squarespace (builder-directory)
+  partner: squarespace
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: builder-directory
+  evidence: https://www.printful.com/integrations/squarespace
+  mirror_of: squarespace/integrations/squarespace-integration-edges.yml
+  apps:
+  - Printful for Squarespace
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: print-on-demand fulfilment integration
+- partner_name: Weebly (builder-directory)
+  partner: weebly
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: builder-directory
+  evidence: https://www.printful.com/integrations/weebly
+  mirror_of: weebly/integrations/weebly-integration-edges.yml
+  apps:
+  - Printful for Weebly
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: print-on-demand fulfilment integration
 templates: []
