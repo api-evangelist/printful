@@ -24,6 +24,7 @@ checked:
 - https://advertising.amazon.com/partners/directory
 - https://sellercentral.amazon.com/gspn
 - https://sellercentral.amazon.com/selling-partner-appstore
+- wix/integrations/wix-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -53,6 +54,21 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
+- partner_name: Amazon Selling Partner Appstore
+  partner: amazon-seller-central
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://sellercentral.amazon.com/selling-partner-appstore/dp/amzn1.sellerapps.app.e1153baf-d4f2-4784-9db0-61393f087e5c
+  mirror_of: amazon-seller-central/integrations/amazon-seller-central-integration-edges.yml
+  apps:
+  - 'Printful: print-on-demand dropshipping'
+  detected: '2026-10-21'
+  detected_by: sweep-amazon-sp-api-appstore.py
 - partner_name: Square (own)
   partner: square
   partner_match: mirror
@@ -206,8 +222,8 @@ edges:
   detected: '2026-10-20'
   detected_by: mirror-platform-listings.py
   category: print-on-demand fulfilment integration
-- partner_name: Amazon Selling Partner Appstore
-  partner: amazon-seller-central
+- partner_name: Wix (own)
+  partner: wix
   partner_match: mirror
   mirror_match: domain
   type: marketplace
@@ -215,10 +231,16 @@ edges:
   direction: third-party
   channel: partner-built
   marketplace: own
-  evidence: https://sellercentral.amazon.com/selling-partner-appstore/dp/amzn1.sellerapps.app.e1153baf-d4f2-4784-9db0-61393f087e5c
-  mirror_of: amazon-seller-central/integrations/amazon-seller-central-integration-edges.yml
+  evidence: https://www.wix.com/app-market/developer/printful
+  mirror_of: wix/integrations/wix-integration-edges.yml
   apps:
-  - 'Printful: print-on-demand dropshipping'
-  detected: '2026-10-21'
-  detected_by: sweep-amazon-sp-api-appstore.py
+  - 'Printful: Print on Demand'
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Print on Demand
+  badges:
+  - WIX_CHOICE
+  publisher_verified:
+  - Verified by Wix
 templates: []

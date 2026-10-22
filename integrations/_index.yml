@@ -29,6 +29,18 @@
     builder: Pipedream repo (component)
   status: not-a-workflow
   arazzo: null
+- slug: printful-amazon-selling-partner-appstore
+  label: Amazon Selling Partner Appstore
+  partner: amazon-seller-central
+  partner_name: Amazon Selling Partner Appstore
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://sellercentral.amazon.com/selling-partner-appstore/dp/amzn1.sellerapps.app.e1153baf-d4f2-4784-9db0-61393f087e5c
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: printful-square-own
   label: Square (own)
   partner: square
@@ -146,14 +158,15 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
-- slug: printful-amazon-selling-partner-appstore
-  label: Amazon Selling Partner Appstore
-  partner: amazon-seller-central
-  partner_name: Amazon Selling Partner Appstore
+- slug: printful-wix-own
+  label: Wix (own)
+  partner: wix
+  partner_name: Wix (own)
+  category: Print on Demand
   type: marketplace
   marketplace: own
   channel: partner-built
-  evidence: https://sellercentral.amazon.com/selling-partner-appstore/dp/amzn1.sellerapps.app.e1153baf-d4f2-4784-9db0-61393f087e5c
+  evidence: https://www.wix.com/app-market/developer/printful
   source: edge
   relationship: platform-app
   status: not-a-workflow
